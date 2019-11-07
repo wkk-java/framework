@@ -1,0 +1,14 @@
+
+framework.iml
+
+oauth2-server/oauth2-server.iml
+
+oauth2-server/target/classes/com/wk/config/AuthorizationServerCofnig.class
+
+oauth2-server/target/maven-archiver/pom.properties
+
+oauth2-server/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst
+
+oauth2-server/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst
+
+oauth2-server/target/oauth2-server-1.0-SNAPSHOT.jar
