@@ -1,0 +1,27 @@
+server:
+  port: 8889
+
+spring:
+  cloud:
+    config:
+      server:
+        git:
+          uri: https://github.com/wkk-java/cloud-config-samples.git
+          force-pull: true
+          search-paths: /*/*/*,/*
+  application:
+    name: spring-cloud-config
+  rabbitmq:
+    host: 192.168.106.128
+    port: 5672
+    username: guest
+    password: guest
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
+management:
+  endpoints:
+    web:
+      exposure:
+        include: 'bus-refresh'
