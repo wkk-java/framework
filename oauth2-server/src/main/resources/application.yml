@@ -1,0 +1,23 @@
+server:
+  port: 8080
+
+spring:
+  redis:
+    host: 192.168.159.128
+    database: 0
+
+application:
+  init:
+    users[0]:
+      username: admin
+      password: '{bcrypt}$2a$10$tMSDLeQjFehV8Z1BxoU3quISNyLXXMDI8pdA3RKdwqv1ujuZ6AAQG'
+      authorities: admin
+      roles: admin,test-admin
+    users[1]:
+      username: test-admin
+      password: '{bcrypt}$2a$10$tMSDLeQjFehV8Z1BxoU3quISNyLXXMDI8pdA3RKdwqv1ujuZ6AAQG'
+      authorities: admin
+      roles: test-admin
+
+
+logging.level.org.springframework.security: info
