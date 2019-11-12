@@ -12,6 +12,7 @@
         <module>oauth2-server</module>
         <module>eureka-server</module>
         <module>config-server</module>
+        <module>spring-cloud-admin</module>
     </modules>
 
 

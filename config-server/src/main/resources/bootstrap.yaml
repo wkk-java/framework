@@ -12,16 +12,26 @@ spring:
   application:
     name: spring-cloud-config
   rabbitmq:
-    host: 192.168.106.128
+    host: 127.0.0.1
     port: 5672
     username: guest
     password: guest
+
 eureka:
   client:
-    service-url:
-      defaultZone: http://localhost:8761/eureka/
+    registryFetchIntervalSeconds: 5
+    serviceUrl:
+      defaultZone: ${EUREKA_SERVICE_URL:http://localhost:8761}/eureka/
+  #admin监控
+  instance:
+    leaseRenewalIntervalInSeconds: 10
+    health-check-url-path: /actuator/health
+
 management:
   endpoints:
     web:
       exposure:
         include: 'bus-refresh'
+  endpoint:
+    health:
+      show-details: ALWAYS
