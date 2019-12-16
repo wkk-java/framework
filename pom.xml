@@ -13,6 +13,7 @@
         <module>eureka-server</module>
         <module>config-server</module>
         <module>spring-cloud-admin</module>
+        <module>spring-cloud-zuul</module>
     </modules>
 
 
@@ -58,6 +59,14 @@
             </plugins>
         </pluginManagement>
 
+        <!--重要 如果不设置resource 会导致application.yaml中的@@找不到pom文件中的配置-->
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <filtering>true</filtering>
+            </resource>
+        </resources>
+        <!--重要 如果不设置resource 会导致application.yaml中的@@找不到pom文件中的配置-->
     </build>
 
     <repositories>

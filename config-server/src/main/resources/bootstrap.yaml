@@ -9,13 +9,20 @@ spring:
           uri: https://github.com/wkk-java/cloud-config-samples.git
           force-pull: true
           search-paths: /*/*/*,/*
+#          username:
+#          password:
   application:
     name: spring-cloud-config
   rabbitmq:
-    host: 127.0.0.1
+    host: 192.168.159.128
     port: 5672
     username: guest
     password: guest
+
+  security:
+    user:
+      name: admin
+      password: admin123
 
 eureka:
   client:

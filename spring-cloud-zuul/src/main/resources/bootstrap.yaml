@@ -1,0 +1,58 @@
+---
+server:
+  port: 9000
+...
+---
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+...
+---
+zuul:
+  routes:
+    demoService:
+      path: /auth2/**
+      serviceId: auth2-server
+    #简洁写法
+    #spring-demo-service: /demoService/**
+  #排除某些路由
+  ignored-patterns:
+    - /spring-demo-service/port
+#    - /demoService/port
+...
+---
+spring:
+  profiles:
+    active: ${SPRING_PROFILES_ACTIVE:local}
+  application:
+    name: @project.name@
+HOSTNAME: ${spring.cloud.client.ipAddress}
+...
+---
+spring:
+  profiles: dev
+  cloud:
+    config:
+      uri: http://localhost:8889
+...
+---
+spring:
+  cloud:
+    config:
+      profile: private
+      label: ${spring.profiles.active}
+      name: @project.name@
+      failFast: true
+      retry:
+        max-attempts: 10
+        initial-interval: 1000
+      username: admin
+      password: admin123
+...
+
