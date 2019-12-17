@@ -3,6 +3,10 @@ spring:
     active: instance1
   application:
     name: eureka-server
+  security:
+    user:
+      name: ${spring_eureka_userName}
+      password: ${spring_eureka_passWord}
 
 eureka:
   client:
