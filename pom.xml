@@ -22,10 +22,6 @@
         <java.version>1.8</java.version>
         <spring-cloud.version>Finchley.SR4</spring-cloud.version>
         <spring-boot.version>2.0.1.RELEASE</spring-boot.version>
-        <spring_eureka_userName>admin</spring_eureka_userName>
-        <spring_eureka_passWord>admin123</spring_eureka_passWord>
-        <spring_eureka_server_url>http://${spring_eureka_userName}:${spring_eureka_passWord}@localhost:8761/eureka/</spring_eureka_server_url>
-        <spring_config_server_url>http://localhost:8889</spring_config_server_url>
     </properties>
     <dependencyManagement>
         <dependencies>
@@ -59,6 +55,33 @@
                         <encoding>UTF-8</encoding>
                     </configuration>
                 </plugin>
+                <plugin>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-maven-plugin</artifactId>
+                    <version>2.1.8.RELEASE</version>
+                    <executions>
+                        <execution>
+                            <id>compile</id>
+                            <phase>compile</phase>
+                            <goals>
+                                <goal>build-info</goal>
+                            </goals>
+                        </execution>
+                        <execution>
+                            <id>package</id>
+                            <phase>package</phase>
+                            <goals>
+                                <goal>repackage</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+<!--                    <configuration>-->
+<!--                        <mainClass>com.wk.Application</mainClass>-->
+<!--                        <layout>ZIP</layout>-->
+<!--                        <attach>false</attach>-->
+<!--                    </configuration>-->
+                </plugin>
+
             </plugins>
         </pluginManagement>
 

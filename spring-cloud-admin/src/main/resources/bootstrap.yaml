@@ -12,16 +12,18 @@ eureka:   #<1>
   instance:
     leaseRenewalIntervalInSeconds: 10
     health-check-url-path: /actuator/health
+    status-page-url: /actuator/info
   client:
     registryFetchIntervalSeconds: 5
     serviceUrl:
-      defaultZone: ${spring_eureka_server_url}
+      defaultZone: http://admin:admin123@localhost:8761/eureka/
 
 management:
   endpoints:
     web:
       exposure:
         include: "*"  #<2>
+#        exclude: "SPRING-CLOUD-CONFIG"
   endpoint:
     health:
       show-details: ALWAYS
@@ -36,10 +38,11 @@ spring:
   profiles: secure
   security:
     user:
-      name: "user"
-      password: "password"
+      name: admin
+      password: admin123
+# 注册给eureka的时候告诉eureka自己的密码
 eureka:
   instance:
     metadata-map:
-      user.name: "user"         #These two are needed so that the server
-      user.password: "password" #can access the protected client endpoints
+      user.name: admin         #These two are needed so that the server can access the protected client endpoints
+      user.password: admin123

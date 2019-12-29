@@ -5,7 +5,7 @@ spring:
   application:
     name: auth2-server
   redis:
-    host: 192.168.159.128
+    host: localhost
     database: 0
 
 application:
@@ -28,7 +28,7 @@ eureka:   #<1>
   client:
     registryFetchIntervalSeconds: 5
     serviceUrl:
-      defaultZone: ${spring_eureka_server_url}
+      defaultZone: http://admin:admin123@localhost:8761/eureka/
 management:
   endpoints:
     web:
