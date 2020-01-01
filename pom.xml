@@ -14,6 +14,8 @@
         <module>config-server</module>
         <module>spring-cloud-admin</module>
         <module>spring-cloud-zuul</module>
+        <module>common</module>
+        <module>sys</module>
     </modules>
 
     <properties>

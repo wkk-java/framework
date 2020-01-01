@@ -1,5 +1,6 @@
 package com.wk;
 
+import com.wk.common.exception.BusinessRuntimeException;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -21,6 +22,12 @@ public class TestEndpoints {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         return "order id : " + id;
     }
+
+    @GetMapping("/find")
+    public String getOrder() {
+        throw new BusinessRuntimeException("100003", "查找失败...");
+    }
+
 
     public static void main(String[] args) {
         System.out.println(new BCryptPasswordEncoder().encode("admin123"));

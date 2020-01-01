@@ -1,2 +1,6 @@
 *.iml
-**/target/**
+**/*.iml
+*/target
+**/target
+*.DS_Store
+**/*.DS_Store
