@@ -1,28 +1,41 @@
 server:
   port: 8001
 
-spring:
-  application:
-    name: sys-server
-  redis:
-    host: localhost
-    database: 0
-
-
-eureka:   #<1>
-  instance:
-    leaseRenewalIntervalInSeconds: 10
-    health-check-url-path: /actuator/health
+---
+eureka:
   client:
-    registryFetchIntervalSeconds: 5
-    serviceUrl:
+    service-url:
       defaultZone: http://admin:admin123@localhost:8761/eureka/
-management:
-  endpoints:
-    web:
-      exposure:
-        include: "*"  #<2>
-  endpoint:
-    health:
-      show-details: ALWAYS
-logging.level.org.springframework.security: info
+...
+
+---
+spring:
+  profiles:
+    active: ${SPRING_PROFILES_ACTIVE:master}
+  application:
+    name: @project.name@
+HOSTNAME: ${spring.cloud.client.ipAddress}
+...
+
+---
+spring:
+  profiles: master
+  cloud:
+    config:
+      uri: http://localhost:8889
+      username: admin
+      password: admin123
+...
+
+---
+spring:
+  cloud:
+    config:
+      profile: ${envName:mac}
+      label: ${spring.profiles.active}
+      name: @project.name@
+      failFast: true
+      retry:
+        max-attempts: 10
+        initial-interval: 1000
+...

@@ -2,17 +2,7 @@
 server:
   port: 9000
 ...
----
-eureka:
-  client:
-    service-url:
-      defaultZone: http://admin:admin123@localhost:8761/eureka/
-management:
-  endpoints:
-    web:
-      exposure:
-        include: '*'
-...
+
 ---
 zuul:
   routes:
@@ -26,6 +16,19 @@ zuul:
     - /spring-demo-service/port
 #    - /demoService/port
 ...
+
+---
+eureka:
+  client:
+    service-url:
+      defaultZone: http://admin:admin123@localhost:8761/eureka/
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+...
+
 ---
 spring:
   profiles:
@@ -34,6 +37,7 @@ spring:
     name: @project.name@
 HOSTNAME: ${spring.cloud.client.ipAddress}
 ...
+
 ---
 spring:
   profiles: master
@@ -43,18 +47,17 @@ spring:
       username: admin
       password: admin123
 ...
+
 ---
 spring:
   cloud:
     config:
-      profile: private
+      profile: ${envName:mac}
       label: ${spring.profiles.active}
       name: @project.name@
       failFast: true
       retry:
         max-attempts: 10
         initial-interval: 1000
-      username: admin
-      password: admin123
 ...
 
