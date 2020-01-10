@@ -7,8 +7,8 @@ server:
 zuul:
   routes:
     demoService:
-      path: /auth2/**
-      serviceId: auth2-server
+      path: /oauth2/**
+      serviceId: oauth2-server
     #简洁写法
     #spring-demo-service: /demoService/**
   #排除某些路由

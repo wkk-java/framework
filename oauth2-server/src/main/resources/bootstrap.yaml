@@ -1,12 +1,9 @@
 server:
   port: 8080
 
-spring:
-  application:
-    name: auth2-server
-  redis:
-    host: localhost
-    database: 0
+#spring:
+#  application:
+#    name: oauth2-server
 
 application:
   init:
