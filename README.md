@@ -1,2 +1,2 @@
-# framework
-based on SpringCloud2.0 plus
+# framework (springcloud版)
+基于SpringCloud Finchley.SR4(2.0.4)
