@@ -40,10 +40,26 @@
             <plugin>
                 <groupId>com.spotify</groupId>
                 <artifactId>docker-maven-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <phase>install</phase>
+                        <goals>
+                            <goal>build</goal>
+                        </goals>
+                        <configuration>
+                            <skipDockerBuild>false</skipDockerBuild>
+                            <skipDockerPush>true</skipDockerPush>
+                        </configuration>
+                    </execution>
+                </executions>
+                <!-- @todo 1.编写插件自定义yml编排,密码配置容器参数化 2.迁移到父项目 -->
                 <configuration>
                     <imageName>${profiles.active}/${project.artifactId}:${project.version}</imageName>
                     <baseImage>java:8</baseImage>
                     <entryPoint>["java", "-jar", "/${project.build.finalName}.jar"]</entryPoint>
+                    <env>
+
+                    </env>
                     <resources>
                         <resource>
                             <targetPath>/</targetPath>
