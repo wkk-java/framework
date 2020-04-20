@@ -53,7 +53,7 @@
                 <artifactId>dockercompose-maven-plugin</artifactId>
                 <inherited>false</inherited>
                 <configuration>
-                    <env />
+
                 </configuration>
             </plugin>
         </plugins>
