@@ -1,6 +1,6 @@
 spring:
   profiles:
-    active: instance1
+    active: dev
   application:
     name: eureka-server
   security:
@@ -34,25 +34,25 @@ management:
 
 ---
 spring:
-  profiles: instance1
+  profiles: dev
 
 server:
-  port: 8761
+  port: 1100
 
 eureka:
   client:
     service-url:
-      defaultZone: http://localhost:8762/eureka/
+      defaultZone: http://${wk-aliyun:localhost}:1101/eureka/
 ...
 ---
 spring:
-  profiles: instance2
+  profiles: prod
 
 server:
-  port: 8762
+  port: 1200
 
 eureka:
   client:
     service-url:
-      defaultZone: http://localhost:8761/eureka/
+      defaultZone: http://${wk-aliyun:localhost}:1201/eureka/
 ...
