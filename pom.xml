@@ -24,6 +24,9 @@
         <java.version>1.8</java.version>
         <spring-cloud.version>Finchley.SR4</spring-cloud.version>
         <spring-boot.version>2.0.1.RELEASE</spring-boot.version>
+
+        <docker.skipDockerBuild>true</docker.skipDockerBuild>
+        <docker.skipDockerPush>true</docker.skipDockerPush>
     </properties>
     <dependencyManagement>
         <dependencies>
@@ -95,12 +98,12 @@
                                 <goal>build</goal>
                             </goals>
                             <configuration>
-                                <skipDockerBuild>false</skipDockerBuild>
-                                <skipDockerPush>true</skipDockerPush>
+                                <skipDockerBuild>${docker.skipDockerBuild}</skipDockerBuild>
+                                <skipDockerPush>${docker.skipDockerPush}</skipDockerPush>
                                 <imageTags>
                                     <imageTag>${project.version}</imageTag>
                                 </imageTags>
-                                <registryUrl></registryUrl>
+                                <registryUrl>http://wk-aliyun:18082/</registryUrl>
                             </configuration>
                         </execution>
                     </executions>
@@ -150,28 +153,20 @@
     <repositories>
         <repository>
             <id>central</id>
-            <url>http://maven.aliyun.com/nexus/content/groups/public</url>
             <name>central</name>
-        </repository>
-        <repository>
-            <id>spring-milestones</id>
-            <name>Spring Milestones</name>
-            <url>https://repo.spring.io/milestone</url>
-            <snapshots>
-                <enabled>false</enabled>
-            </snapshots>
+            <url>http://wk-aliyun:1000/repository/maven-public/</url>
         </repository>
     </repositories>
     <distributionManagement>
         <repository>
             <id>releases</id>
             <name>Releases</name>
-            <url>http://106.14.202.235:1000/repository/maven-releases/</url>
+            <url>http://wk-aliyun:1000/repository/maven-releases/</url>
         </repository>
         <snapshotRepository>
             <id>snapshots</id>
             <name>Snapshot</name>
-            <url>http://106.14.202.235:1000/repository/maven-snapshots/</url>
+            <url>http://wk-aliyun:1000/repository/maven-snapshots/</url>
         </snapshotRepository>
     </distributionManagement>
 
@@ -185,8 +180,7 @@
             </properties>
             <!--activation用来指定激活方式，可以根据jdk环境，环境变量，文件的存在或缺失-->
             <activation>
-                <!--这个字段表示默认激活-->
-                <activeByDefault>true</activeByDefault>
+                <activeByDefault>true</activeByDefault> <!--这个字段表示默认激活-->
             </activation>
         </profile>
         <profile>
