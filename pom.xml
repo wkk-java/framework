@@ -101,6 +101,7 @@
                             <configuration>
                                 <skipDockerBuild>${docker.skipDockerBuild}</skipDockerBuild>
                                 <skipDockerPush>${docker.skipDockerPush}</skipDockerPush>
+                                <imageName>wk-aliyun:18082/${project.artifactId}:${project.version}</imageName>
                                 <imageTags>
                                     <imageTag>${project.version}</imageTag>
                                 </imageTags>
@@ -109,7 +110,6 @@
                         </execution>
                     </executions>
                     <configuration>
-                        <imageName>wk-aliyun:18082/${project.artifactId}:${project.version}</imageName>
                         <baseImage>java:8</baseImage>
                         <entryPoint>["java", "-jar", "/${project.build.finalName}.jar"]</entryPoint>
                         <env>
