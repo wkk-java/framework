@@ -108,7 +108,7 @@
                         </execution>
                     </executions>
                     <configuration>
-                        <imageName>${profiles.active}/${project.artifactId}:${project.version}</imageName>
+                        <imageName>wk-aliyun:18082/${project.artifactId}:${project.version}</imageName>
                         <baseImage>java:8</baseImage>
                         <entryPoint>["java", "-jar", "/${project.build.finalName}.jar"]</entryPoint>
                         <env>
