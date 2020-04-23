@@ -105,7 +105,7 @@
                                 <imageTags>
                                     <imageTag>${project.version}</imageTag>
                                 </imageTags>
-                                <registryUrl>${dockerNexusServer}:${dockerNexusServerPort}</registryUrl>
+                                <registryUrl>http://${dockerNexusServer}:${dockerNexusServerPort}</registryUrl>
                             </configuration>
                         </execution>
                     </executions>
@@ -121,6 +121,8 @@
                                 <include>${project.build.finalName}.jar</include>
                             </resource>
                         </resources>
+                        <forceTags>true</forceTags>
+                        <serverId>nexus</serverId>
                     </configuration>
                 </plugin>
 
@@ -199,12 +201,12 @@
     </repositories>
     <distributionManagement>
         <repository>
-            <id>releases</id>
+            <id>nexus</id>
             <name>Releases</name>
             <url>http://wk-aliyun:1000/repository/maven-releases/</url>
         </repository>
         <snapshotRepository>
-            <id>snapshots</id>
+            <id>nexus</id>
             <name>Snapshot</name>
             <url>http://wk-aliyun:1000/repository/maven-snapshots/</url>
         </snapshotRepository>
