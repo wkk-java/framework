@@ -5,7 +5,7 @@
     <parent>
         <artifactId>framework</artifactId>
         <groupId>com.wk</groupId>
-        <version>1.0-SNAPSHOT</version>
+        <version>1.0.0-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
     <artifactId>config-server</artifactId>
@@ -35,8 +35,15 @@
     <build>
         <plugins>
             <plugin>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
+                <groupId>com.spotify</groupId>
+                <artifactId>docker-maven-plugin</artifactId>
+                <inherited>false</inherited>
+            </plugin>
+
+            <plugin>
+                <groupId>com.wk</groupId>
+                <artifactId>dockercompose-maven-plugin</artifactId>
+                <inherited>false</inherited>
             </plugin>
         </plugins>
     </build>

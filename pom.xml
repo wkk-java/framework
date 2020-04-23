@@ -7,7 +7,7 @@
     <groupId>com.wk</groupId>
     <artifactId>framework</artifactId>
     <packaging>pom</packaging>
-    <version>1.0-SNAPSHOT</version>
+    <version>1.0.0-SNAPSHOT</version>
     <modules>
         <module>oauth2-server</module>
         <module>eureka-server</module>
@@ -48,6 +48,7 @@
     </dependencyManagement>
 
     <build>
+
         <pluginManagement>
             <plugins>
                 <plugin>
@@ -122,7 +123,7 @@
                             </resource>
                         </resources>
                         <forceTags>true</forceTags>
-                        <serverId>nexus</serverId>
+                        <serverId>central</serverId>
                     </configuration>
                 </plugin>
 
@@ -148,6 +149,29 @@
         </pluginManagement>
 
         <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.5.1</version>
+                <configuration>
+                    <source>${java.version}</source>
+                    <target>${java.version}</target>
+                    <encoding>${project.build.sourceEncoding}</encoding>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-resources-plugin</artifactId>
+                <version>3.1.0</version>
+                <configuration>
+                    <encoding>UTF-8</encoding>
+                    <nonFilteredFileExtensions>
+                        <nonFilteredFileExtension></nonFilteredFileExtension>
+                    </nonFilteredFileExtensions>
+                </configuration>
+            </plugin>
+
             <!--  源码发布  -->
             <plugin>
                 <artifactId>maven-source-plugin</artifactId>
@@ -181,6 +205,7 @@
                     <tagNameFormat>@{project.version}</tagNameFormat>
                 </configuration>
             </plugin>
+
         </plugins>
         <!--重要 如果不设置resource 会导致application.yaml中的@@找不到pom文件中的配置-->
         <resources>
@@ -201,12 +226,12 @@
     </repositories>
     <distributionManagement>
         <repository>
-            <id>nexus</id>
+            <id>Releases</id>
             <name>Releases</name>
             <url>http://wk-aliyun:1000/repository/maven-releases/</url>
         </repository>
         <snapshotRepository>
-            <id>nexus</id>
+            <id>Snapshot</id>
             <name>Snapshot</name>
             <url>http://wk-aliyun:1000/repository/maven-snapshots/</url>
         </snapshotRepository>
