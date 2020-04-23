@@ -53,9 +53,6 @@
                 <groupId>com.wk</groupId>
                 <artifactId>dockercompose-maven-plugin</artifactId>
                 <inherited>false</inherited>
-                <configuration>
-
-                </configuration>
             </plugin>
         </plugins>
     </build>
