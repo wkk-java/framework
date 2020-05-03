@@ -15,10 +15,10 @@ import org.springframework.security.web.authentication.SavedRequestAwareAuthenti
 @EnableAutoConfiguration
 @EnableAdminServer
 @EnableEurekaClient
-public class SpringCloudAdminApplication {
+public class Application {
 
     public static void main(String[] args) {
-        SpringApplication.run(SpringCloudAdminApplication.class, args);
+        SpringApplication.run(Application.class, args);
     }
 
     @Profile("insecure")
