@@ -1,13 +1,13 @@
 
 spring:
   profiles:
-    active: instance1
+    active: ${profile:test}
   application:
     name: eureka-server
   security:
     user:
-      name: admin
-      password: admin123
+      name: ${SECURITY_USER}
+      password: ${SECURITY_USER_PASSWORD}
 
 eureka:
   client:
@@ -35,25 +35,13 @@ management:
 
 ---
 spring:
-  profiles: instance1
+  profiles: ${profile:test}
 
 server:
-  port: 2001
+  port: ${server.port:2001}
 
 eureka:
   client:
     service-url:
-      defaultZone: http://${wk-aliyun:localhost}:2101/eureka/
-...
----
-spring:
-  profiles: instance2
-
-server:
-  port: 2101
-
-eureka:
-  client:
-    service-url:
-      defaultZone: http://${wk-aliyun:localhost}:2001/eureka/
+      defaultZone: ${EUREKA_SERVER_LIST:http://EUREKA_SERVER:2001/eureka/}
 ...

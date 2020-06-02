@@ -30,6 +30,14 @@ spring:
 ---
 spring:
   cloud:
+    nacos:
+      discovery:
+        server-addr: 106.14.202.235:8848
+...
+
+---
+spring:
+  cloud:
     config:
       profile: ${envName:mac}
       label: ${spring.profiles.active}

@@ -24,6 +24,7 @@
         <java.version>1.8</java.version>
         <spring-cloud.version>Finchley.SR4</spring-cloud.version>
         <spring-boot.version>2.0.1.RELEASE</spring-boot.version>
+        <spring-nacos.version>2.2.1.RELEASE</spring-nacos.version>
 
         <dockerNexusServer>wk-aliyun</dockerNexusServer>
         <dockerNexusServerPort>18082</dockerNexusServerPort>
@@ -44,6 +45,27 @@
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
+
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-alibaba-dependencies</artifactId>
+                <version>0.1.2.RELEASE</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>com.alibaba.cloud</groupId>
+                <artifactId>spring-cloud-starter-alibaba-nacos-config</artifactId>
+                <version>${spring-nacos.version}</version>
+            </dependency>
+            <!-- https://mvnrepository.com/artifact/com.alibaba.cloud/spring-cloud-starter-alibaba-nacos-discovery -->
+            <dependency>
+                <groupId>com.alibaba.cloud</groupId>
+                <artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
+                <version>${spring-nacos.version}</version>
+            </dependency>
+
         </dependencies>
     </dependencyManagement>
 
@@ -226,6 +248,10 @@
             <id>central</id>
             <name>central</name>
             <url>http://wk-aliyun:1000/repository/maven-public/</url>
+            <releases>
+                <enabled>true</enabled>
+                <updatePolicy>always</updatePolicy>
+            </releases>
         </repository>
     </repositories>
     <distributionManagement>
@@ -261,7 +287,6 @@
                 <docker.skipDockerBuild>false</docker.skipDockerBuild>
                 <docker.skipDockerPush>false</docker.skipDockerPush>
             </properties>
-
         </profile>
     </profiles>
 </project>
