@@ -44,4 +44,6 @@ eureka:
   client:
     service-url:
       defaultZone: ${EUREKA_SERVER_LIST:http://EUREKA_SERVER:2001/eureka/}
+  instance:
+    hostname: ${EUREKA_INSTANCE_HOSTNAME:eureka_server_1}
 ...
