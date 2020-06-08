@@ -38,7 +38,7 @@ spring:
   profiles: ${profile:test}
 
 server:
-  port: ${server.port:2001}
+  port: ${server_port:2001}
 
 eureka:
   client:
