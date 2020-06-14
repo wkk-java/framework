@@ -13,7 +13,7 @@ eureka:
     fetch-registry: true
     registry-fetch-interval-seconds: 10
     service-url:
-      defaultZone: ${EUREKA_SERVER_LIST:http://EUREKA_SERVER:2001/eureka/}
+      defaultZone: ${ADD_EUREKA_SERVER_LIST:http://EUREKA_SERVER:2001/eureka/}
   server:
     enable-self-preservation: true
     eviction-interval-timer-in-ms: 10000
@@ -22,9 +22,9 @@ eureka:
     lease-renewal-interval-in-seconds: 5
     lease-expiration-duration-in-seconds: 10
     #   hostname: ${EUREKA_INSTANCE_HOSTNAME:eureka_server_1}
-    metadata-map:
-      user.name: ${spring.security.user.name}
-      user.password: ${spring.security.user.password}
+#    metadata-map:
+#      user.name: ${spring.security.user.name}
+#      user.password: ${spring.security.user.password}
 
 management:
   endpoints:
