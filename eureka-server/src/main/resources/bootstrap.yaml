@@ -1,7 +1,4 @@
-
 spring:
-  profiles:
-    active: ${profile:test}
   application:
     name: eureka-server
   security:
@@ -12,17 +9,22 @@ spring:
 eureka:
   client:
     #由于该应用为注册中心,设置为false,表明不向注册中心注册自己
-    register-with-eureka: false
+    register-with-eureka: true
+    fetch-registry: true
+    registry-fetch-interval-seconds: 10
+    service-url:
+      defaultZone: ${EUREKA_SERVER_LIST:http://EUREKA_SERVER:2001/eureka/}
   server:
-    enable-self-preservation: false
+    enable-self-preservation: true
+    eviction-interval-timer-in-ms: 10000
     #是否从eureka服务器获取注册信息，这里不需要
-
-logging:
-  level:
-    com:
-      netflix:
-        eureka: OFF
-        discovery: OFF
+  instance:
+    lease-renewal-interval-in-seconds: 5
+    lease-expiration-duration-in-seconds: 10
+    #   hostname: ${EUREKA_INSTANCE_HOSTNAME:eureka_server_1}
+    metadata-map:
+      user.name: ${spring.security.user.name}
+      user.password: ${spring.security.user.password}
 
 management:
   endpoints:
@@ -33,17 +35,12 @@ management:
     health:
       show-details: ALWAYS
 
----
-spring:
-  profiles: ${profile:test}
-
 server:
   port: ${server_port:2001}
 
-eureka:
-  client:
-    service-url:
-      defaultZone: ${EUREKA_SERVER_LIST:http://EUREKA_SERVER:2001/eureka/}
-  instance:
-    hostname: ${EUREKA_INSTANCE_HOSTNAME:eureka_server_1}
-...
+logging:
+  level:
+    com:
+      netflix:
+        eureka: OFF
+        discovery: OFF
