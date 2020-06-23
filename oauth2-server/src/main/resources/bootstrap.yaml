@@ -16,19 +16,22 @@ application:
       authorities: admin
       roles: test-admin
 
-eureka:   #<1>
+eureka:
   instance:
     leaseRenewalIntervalInSeconds: 10
     health-check-url-path: /actuator/health
+    prefer-ip-address: true #跨域访问
   client:
     registryFetchIntervalSeconds: 5
+    registerWithEureka: false # 此应用为注册中心，false：不向注册中心注册自己。
+    fetchRegistry: false # 注册中心职责是维护服务实例，false：不检索服务。
     serviceUrl:
-      defaultZone: http://admin:${SECURITY_USER_PASSWORD}@eureka:2001/eureka/
+      defaultZone: http://admin:admin123@jr-server:2001/eureka/,http://admin:admin123@jr-server:2002/eureka/,http://admin:admin123@jr-server/eureka/
 management:
   endpoints:
     web:
       exposure:
-        include: "*"  #<2>
+        include: "*"
   endpoint:
     health:
       show-details: ALWAYS
@@ -40,7 +43,6 @@ spring:
     active: ${SPRING_PROFILES_ACTIVE:master}
   application:
     name: "@project.name@"
-HOSTNAME: ${spring.cloud.client.ipAddress}
 ...
 
 ---
@@ -57,7 +59,7 @@ spring:
 spring:
   cloud:
     config:
-      profile: ${CONFIG_PROFILE:mac}
+      profile: ${PROFILE:mac}
       label: ${spring.profiles.active}
       name: "@project.name@"
       failFast: true
