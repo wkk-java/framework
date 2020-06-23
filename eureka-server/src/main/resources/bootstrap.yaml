@@ -38,6 +38,3 @@ logging:
       netflix:
         eureka: OFF
         discovery: OFF
-security:
-  basic:
-    enabled: false
