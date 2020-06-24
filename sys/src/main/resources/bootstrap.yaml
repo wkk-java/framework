@@ -5,7 +5,7 @@ server:
 eureka:
   client:
     service-url:
-      defaultZone: http://admin:admin123@localhost:8761/eureka/
+      defaultZone: http://admin:admin123@lj-server:2001/eureka/,http://admin:admin123@lj-server:2002/eureka/,http://admin:admin123@wk-server:2003/eureka/
 ...
 
 ---
@@ -22,17 +22,9 @@ spring:
   profiles: master
   cloud:
     config:
-      uri: http://localhost:8889
-      username: admin
-      password: admin123
-...
-
----
-spring:
-  cloud:
-    nacos:
-      discovery:
-        server-addr: 106.14.202.235:8848
+      uri: ${configserverurl:http://localhost:2010}
+#      username: admin
+#      password: ${SECURITY_USER_PASSWORD}
 ...
 
 ---

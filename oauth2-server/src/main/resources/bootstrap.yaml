@@ -23,10 +23,8 @@ eureka:
     prefer-ip-address: true #跨域访问
   client:
     registryFetchIntervalSeconds: 5
-    registerWithEureka: false # 此应用为注册中心，false：不向注册中心注册自己。
-    fetchRegistry: false # 注册中心职责是维护服务实例，false：不检索服务。
     serviceUrl:
-      defaultZone: http://admin:admin123@jr-server:2001/eureka/,http://admin:admin123@jr-server:2002/eureka/,http://admin:admin123@jr-server/eureka/
+      defaultZone: http://admin:admin123@lj-server:2001/eureka/,http://admin:admin123@lj-server:2002/eureka/,http://admin:admin123@wk-server:2003/eureka/
 management:
   endpoints:
     web:

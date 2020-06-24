@@ -18,8 +18,12 @@ public class Test1 {
     @Value("${application.author.address:defaultAddr}")
     private String address;
 
+    @Value("${server.port}")
+    private int serverPort;
+
     @GetMapping(value = "/getAppName")
     public String getAppName() {
-        return "name:" + appName + ",addr:" + address;
+        return "name:" + appName + ",addr:" + address + ",port:" + serverPort;
     }
+
 }
