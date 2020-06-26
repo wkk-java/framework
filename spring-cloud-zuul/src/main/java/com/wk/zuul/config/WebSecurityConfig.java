@@ -22,7 +22,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 //                .anyRequest().authenticated()
 //                .and()
                 .csrf().disable();
-//        开启影响授权登录页面
         super.configure(http);
     }
 }

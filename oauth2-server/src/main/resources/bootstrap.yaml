@@ -24,7 +24,7 @@ eureka:
   client:
     registryFetchIntervalSeconds: 5
     serviceUrl:
-      defaultZone: ${eureka_server:http://admin:admin123@lj-server:2001/eureka/,http://admin:admin123@lj-server:2002/eureka/,http://admin:admin123@-server:2003/eureka/}
+      defaultZone: ${eureka_server:http://admin:${SECURITY_USER_PASSWORD}@wk-server:2001/eureka/,http://admin:${SECURITY_USER_PASSWORD}@jr-server:2002/eureka/,http://admin:${SECURITY_USER_PASSWORD}@lj-server:2003/eureka/}
 management:
   endpoints:
     web:
@@ -48,7 +48,7 @@ spring:
   profiles: master
   cloud:
     config:
-      uri: ${configserverurl:http://localhost:2010}
+      uri: ${configserverurl:http://admin:${SECURITY_USER_PASSWORD}@wk-server:2010}
       username: admin
       password: ${SECURITY_USER_PASSWORD}
 ...
