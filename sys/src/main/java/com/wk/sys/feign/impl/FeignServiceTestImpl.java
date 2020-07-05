@@ -2,7 +2,7 @@ package com.wk.sys.feign.impl;
 
 import com.wk.sys.feign.FeignServiceTest;
 import feign.hystrix.FallbackFactory;
-import lombok.extern.slf4j.Slf4j;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Component;
 
 /**
@@ -10,9 +10,10 @@ import org.springframework.stereotype.Component;
  * create at: 2020/6/24 01:08
  * @description:
  */
-@Slf4j
+@Log4j2
 @Component
-public class FeignServiceTestImpl implements FallbackFactory<FeignServiceTest>, FeignServiceTest {
+public class FeignServiceTestImpl implements FallbackFactory<FeignServiceTest>, FeignServiceTest{
+
     @Override
     public String getAppName() {
         log.info("报错啦....,{0}", cause);
@@ -20,10 +21,15 @@ public class FeignServiceTestImpl implements FallbackFactory<FeignServiceTest>, 
     }
 
     @Override
+    public String find() {
+        log.error(cause);
+        return null;
+    }
+
+    @Override
     public FeignServiceTest create(Throwable throwable) {
         this.cause = throwable;
         return this;
-//        return new FeignServiceTestImpl();
     }
 
     private Throwable cause;

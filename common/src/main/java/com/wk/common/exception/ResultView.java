@@ -12,7 +12,7 @@ public class ResultView {
     /**
      * 状态码
      */
-    private Integer code;
+    private String code;
 
     /**
      * 消息
@@ -50,6 +50,17 @@ public class ResultView {
      */
     public static ResultView error() {
         return new ResultView(ResultEnum.CODE_2.getCode(), ResultEnum.CODE_2.getMsg());
+    }
+
+    /**
+     * 错误
+     *
+     * @param code code
+     * @param message message
+     * @return 结果视图
+     */
+    public static ResultView error(String code, String message) {
+        return new ResultView(code, message);
     }
 
     /**
@@ -95,7 +106,7 @@ public class ResultView {
         this.msg = ResultEnum.CODE_1.getMsg();
     }
 
-    private ResultView(Integer code, String msg) {
+    private ResultView(String code, String msg) {
         this.code = code;
         this.msg = msg;
     }

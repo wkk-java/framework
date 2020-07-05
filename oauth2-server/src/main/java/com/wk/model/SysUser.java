@@ -1,6 +1,5 @@
-package com.wk.config;
+package com.wk.model;
 
-import com.wk.model.OauthSysUser;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
 
@@ -14,6 +13,7 @@ public class SysUser {
      * 测试用户.
      */
     static List<OauthSysUser> users;
+
     public void setUsers(List<OauthSysUser> users) {
         this.users = users;
     }

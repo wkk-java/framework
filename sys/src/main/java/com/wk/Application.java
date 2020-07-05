@@ -2,6 +2,7 @@ package com.wk;
 
 import com.netflix.loadbalancer.IRule;
 import com.netflix.loadbalancer.ZoneAvoidanceRule;
+import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration;
@@ -16,12 +17,12 @@ import org.springframework.context.annotation.Bean;
  */
 @EnableFeignClients
 @EnableEurekaClient
+@MapperScan(value = {"com.wk.*.mapper"})
 @SpringBootApplication(exclude = {SecurityAutoConfiguration.class})
 public class Application {
     public static void main(String[] args) {
         SpringApplication.run(Application.class, args);
     }
-
 
     // 负载均衡规则，改为随机
     @Bean

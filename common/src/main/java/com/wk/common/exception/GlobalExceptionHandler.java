@@ -16,7 +16,7 @@ public class GlobalExceptionHandler {
     public ResultView defaultErrorHandler(BusinessRuntimeException e) {
         e.printStackTrace();
         log.error("出现错误了：", e);
-        return ResultView.error(e.getMessage());
+        return ResultView.error(e.getCode(), e.getMessage());
     }
 
     @ExceptionHandler(value = RuntimeException.class)

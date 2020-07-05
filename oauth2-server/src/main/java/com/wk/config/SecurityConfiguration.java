@@ -2,8 +2,8 @@ package com.wk.config;
 
 
 import com.wk.model.OauthSysUser;
+import com.wk.model.SysUser;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -17,7 +17,6 @@ import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 
 import java.util.List;
 
-@Configuration
 @EnableWebSecurity
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
@@ -26,33 +25,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 //    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 //        auth.inMemoryAuthentication().passwordEncoder(new BCryptPasswordEncoder());
 //    }
-
-
-    //可配置在数据库中查询
-    @Bean
-    @Override
-    protected UserDetailsService userDetailsService(){
-        BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
-//        password 方案一：明文存储，用于测试，不能用于生产
-//        String finalPassword = "123456";
-//        password 方案二：用 BCrypt 对密码编码
-//        String finalPassword = bCryptPasswordEncoder.encode("123456");
-        // password 方案三：支持多种编码，通过密码的前缀区分编码方式
-        String finalPassword = "{bcrypt}$2a$10$tMSDLeQjFehV8Z1BxoU3quISNyLXXMDI8pdA3RKdwqv1ujuZ6AAQG";
-        InMemoryUserDetailsManager manager = new InMemoryUserDetailsManager();
-
-        List<OauthSysUser> userList = SysUser.getUserList();
-        userList.stream().forEach(user -> {
-            List<String> authorities = user.getAuthorities();
-            User.UserBuilder password = User.withUsername(user.getUsername()).password(user.getPassword());
-            if (authorities != null && !authorities.isEmpty()) {
-                authorities.forEach(str -> password.authorities(str));
-            }
-            manager.createUser(password.build());
-        });
-//        manager.createUser(User.withUsername("user_2").password(finalPassword).authorities("USER").build());
-        return manager;
-    }
 
     /**
      * springboot2.0 删除了原来的 plainTextPasswordEncoder
@@ -97,6 +69,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
             .and().csrf().and()
                 .authorizeRequests()
                 .antMatchers("/oauth/**").permitAll();
+                //单个用户最大允许并发数,若不设置,新会话踢掉旧会话.
+        //.and().sessionManagement().maximumSessions(1).;
         // @formatter:on
     }
 }

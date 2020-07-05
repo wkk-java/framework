@@ -1,6 +1,9 @@
 package com.wk.controller;
 
 import com.wk.common.exception.BusinessRuntimeException;
+import com.wk.common.exception.ExceptionType;
+import com.wk.feign.UserInfoFeignService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.security.core.Authentication;
@@ -8,6 +11,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RefreshScope
@@ -16,6 +20,9 @@ public class Test2 {
 
     @Value("${application.author.names:hhhhh}")
     private String author;
+
+    @Autowired
+    private UserInfoFeignService userInfoFeignService;
 
     @GetMapping("/getConfig")
     public String getConfig() {
@@ -36,9 +43,14 @@ public class Test2 {
 
     @GetMapping("/find")
     public String getOrder() {
-        throw new BusinessRuntimeException("100003", "查找失败...");
+        throw new BusinessRuntimeException(ExceptionType.REMARK, "查找失败...");
     }
 
+    @GetMapping(value = "/getUserInfo")
+    public Object getUserInfo(@RequestParam("loginName") String loginName, @RequestParam("pwd") String pwd) {
+        Object obj = userInfoFeignService.getUserInfo(loginName, pwd);
+        return obj;
+    }
 
     public static void main(String[] args) {
         System.out.println(new BCryptPasswordEncoder().encode("admin123"));

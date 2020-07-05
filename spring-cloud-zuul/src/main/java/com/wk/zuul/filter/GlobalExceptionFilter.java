@@ -2,6 +2,7 @@ package com.wk.zuul.filter;
 
 import com.netflix.zuul.context.RequestContext;
 import com.wk.common.exception.BusinessRuntimeException;
+import com.wk.common.exception.ExceptionType;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.cloud.netflix.zuul.filters.post.SendErrorFilter;
@@ -49,7 +50,7 @@ public class GlobalExceptionFilter extends SendErrorFilter {
             ctx.set(SEND_ERROR_FILTER_RAN, true);
             if (!ctx.getResponse().isCommitted()) {
                 ctx.setResponseStatusCode(HttpStatus.BAD_REQUEST.value());
-                BusinessRuntimeException bre = new BusinessRuntimeException("400", "error");
+                BusinessRuntimeException bre = new BusinessRuntimeException(ExceptionType.EXCEPTION_400, "error");
                 bre.setThrowable(throwable);
                 String response = ctx.getResponseBody();
                 ctx.setResponseBody(bre.toString());

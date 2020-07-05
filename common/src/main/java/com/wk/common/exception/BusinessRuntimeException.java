@@ -11,8 +11,8 @@ public class BusinessRuntimeException extends RuntimeException{
     private String message;
     private Throwable throwable;
 
-    public BusinessRuntimeException(String code, String message) {
-        this.code = code;
+    public BusinessRuntimeException(ExceptionType exceptionType, String message) {
+        this.code = exceptionType.getCode();
         this.message = message;
     }
 
