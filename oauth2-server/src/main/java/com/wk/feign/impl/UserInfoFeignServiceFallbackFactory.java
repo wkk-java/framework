@@ -23,6 +23,7 @@ public class UserInfoFeignServiceFallbackFactory implements UserInfoFeignService
         if (throwable instanceof BusinessRuntimeException) {
             throw new BusinessRuntimeException(ExceptionType.REMARK, JSONObject.toJSONString(throwable));
         }
+        log.error("调用发生错误了，{0}", throwable);
         return null;
     }
 
@@ -31,6 +32,7 @@ public class UserInfoFeignServiceFallbackFactory implements UserInfoFeignService
         if (throwable instanceof BusinessRuntimeException) {
             throw new BusinessRuntimeException(ExceptionType.REMARK, JSONObject.toJSONString(throwable));
         }
+        log.error("调用发生错误了，{0}", throwable);
         return null;
     }
 

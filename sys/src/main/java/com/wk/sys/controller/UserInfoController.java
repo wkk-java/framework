@@ -91,6 +91,11 @@ public class UserInfoController {
 
     @GetMapping(value = "/getUserInfo")
     public SysUser getUserInfo(@RequestParam("loginName") String loginName, @RequestParam("pwd") String pwd) {
+        try{
+            Thread.sleep(5000);
+        } catch (Exception ex) {
+            log.error("错误信息：{0}", ex);
+        }
         SysUserExample sysUserExample = new SysUserExample();
         sysUserExample.createCriteria().andLoginNameEqualTo(loginName);
         List<SysUser> sysUsers = sysUserMapper.selectByExample(sysUserExample);

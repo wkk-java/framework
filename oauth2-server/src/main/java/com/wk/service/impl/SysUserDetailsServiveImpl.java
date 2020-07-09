@@ -1,8 +1,8 @@
 package com.wk.service.impl;
 
 import com.alibaba.fastjson.JSONObject;
-import com.wk.common.model.UserInfo;
 import com.wk.feign.UserInfoFeignService;
+import com.wk.model.UserInfo;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
