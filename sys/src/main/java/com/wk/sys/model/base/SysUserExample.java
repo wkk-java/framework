@@ -1874,6 +1874,126 @@ public class SysUserExample {
             addCriterion("password_overdue_time not between", value1, value2, "passwordOverdueTime");
             return (Criteria) this;
         }
+
+        public Criteria andIsLockIsNull() {
+            addCriterion("is_lock is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsLockIsNotNull() {
+            addCriterion("is_lock is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsLockEqualTo(Integer value) {
+            addCriterion("is_lock =", value, "isLock");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsLockNotEqualTo(Integer value) {
+            addCriterion("is_lock <>", value, "isLock");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsLockGreaterThan(Integer value) {
+            addCriterion("is_lock >", value, "isLock");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsLockGreaterThanOrEqualTo(Integer value) {
+            addCriterion("is_lock >=", value, "isLock");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsLockLessThan(Integer value) {
+            addCriterion("is_lock <", value, "isLock");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsLockLessThanOrEqualTo(Integer value) {
+            addCriterion("is_lock <=", value, "isLock");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsLockIn(List<Integer> values) {
+            addCriterion("is_lock in", values, "isLock");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsLockNotIn(List<Integer> values) {
+            addCriterion("is_lock not in", values, "isLock");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsLockBetween(Integer value1, Integer value2) {
+            addCriterion("is_lock between", value1, value2, "isLock");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsLockNotBetween(Integer value1, Integer value2) {
+            addCriterion("is_lock not between", value1, value2, "isLock");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsEnableIsNull() {
+            addCriterion("is_enable is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsEnableIsNotNull() {
+            addCriterion("is_enable is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsEnableEqualTo(Integer value) {
+            addCriterion("is_enable =", value, "isEnable");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsEnableNotEqualTo(Integer value) {
+            addCriterion("is_enable <>", value, "isEnable");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsEnableGreaterThan(Integer value) {
+            addCriterion("is_enable >", value, "isEnable");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsEnableGreaterThanOrEqualTo(Integer value) {
+            addCriterion("is_enable >=", value, "isEnable");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsEnableLessThan(Integer value) {
+            addCriterion("is_enable <", value, "isEnable");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsEnableLessThanOrEqualTo(Integer value) {
+            addCriterion("is_enable <=", value, "isEnable");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsEnableIn(List<Integer> values) {
+            addCriterion("is_enable in", values, "isEnable");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsEnableNotIn(List<Integer> values) {
+            addCriterion("is_enable not in", values, "isEnable");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsEnableBetween(Integer value1, Integer value2) {
+            addCriterion("is_enable between", value1, value2, "isEnable");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsEnableNotBetween(Integer value1, Integer value2) {
+            addCriterion("is_enable not between", value1, value2, "isEnable");
+            return (Criteria) this;
+        }
     }
 
     public static class Criteria extends GeneratedCriteria {

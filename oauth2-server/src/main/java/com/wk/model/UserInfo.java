@@ -23,6 +23,9 @@ public class UserInfo implements UserDetails, Serializable {
     private String loginName;
     private String password;
     private String clientId;
+    private Integer stutus;
+    private Integer isLock;
+    private Integer isEnable;
     private List<String> sysRoleNames;
     private List<GrantedAuthority> grantedAuthorityList;
 
@@ -51,21 +54,21 @@ public class UserInfo implements UserDetails, Serializable {
 
     @Override
     public boolean isAccountNonExpired() {
-        return false;
+        return true;
     }
 
     @Override
     public boolean isAccountNonLocked() {
-        return false;
+        return isLock != 1;
     }
 
     @Override
     public boolean isCredentialsNonExpired() {
-        return false;
+        return true;
     }
 
     @Override
     public boolean isEnabled() {
-        return false;
+        return isEnable == 1;
     }
 }

@@ -1,10 +1,9 @@
-package com.wk.feign.impl;
+package com.wk.feign;
 
 import com.alibaba.fastjson.JSONObject;
 import com.wk.common.exception.BusinessRuntimeException;
 import com.wk.common.exception.ExceptionType;
 import com.wk.model.SysUser;
-import com.wk.feign.UserInfoFeignService;
 import feign.hystrix.FallbackFactory;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Component;

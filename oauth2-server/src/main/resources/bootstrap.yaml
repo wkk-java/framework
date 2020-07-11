@@ -17,6 +17,7 @@ application:
       authorities: admin
       roles: test-admin
 
+logging.level.org.springframework.security: DEBUG
 ---
 spring:
   profiles:

@@ -24,7 +24,7 @@ public class Test2 {
     @Autowired
     private UserInfoFeignService userInfoFeignService;
 
-    @GetMapping("/getConfig")
+    @GetMapping("/app/getConfig")
     public String getConfig() {
         return "author is " + author;
     }
@@ -41,12 +41,12 @@ public class Test2 {
         return "order id : " + id;
     }
 
-    @GetMapping("/find")
+    @GetMapping("/order/find")
     public String getOrder() {
         throw new BusinessRuntimeException(ExceptionType.REMARK, "查找失败...");
     }
 
-    @GetMapping(value = "/getUserInfo")
+    @GetMapping(value = "/user/getUserInfo")
     public Object getUserInfo(@RequestParam("loginName") String loginName, @RequestParam("pwd") String pwd) {
         Object obj = userInfoFeignService.getUserInfo(loginName, pwd);
         return obj;

@@ -55,6 +55,10 @@ public class SysUser {
 
     private Date passwordOverdueTime;
 
+    private Integer isLock;
+
+    private Integer isEnable;
+
     public String getId() {
         return id;
     }
@@ -261,5 +265,21 @@ public class SysUser {
 
     public void setPasswordOverdueTime(Date passwordOverdueTime) {
         this.passwordOverdueTime = passwordOverdueTime;
+    }
+
+    public Integer getIsLock() {
+        return isLock;
+    }
+
+    public void setIsLock(Integer isLock) {
+        this.isLock = isLock;
+    }
+
+    public Integer getIsEnable() {
+        return isEnable;
+    }
+
+    public void setIsEnable(Integer isEnable) {
+        this.isEnable = isEnable;
     }
 }

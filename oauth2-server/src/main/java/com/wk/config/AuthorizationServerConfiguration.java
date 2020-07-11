@@ -1,6 +1,7 @@
 package com.wk.config;
 
 import com.wk.config.model.OAuth2ClientProperties;
+import com.wk.service.impl.OauthUserDetailsServiveImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
@@ -21,7 +22,11 @@ import org.springframework.security.oauth2.provider.token.store.redis.RedisToken
 import java.util.Iterator;
 import java.util.Map;
 
+/**
+ * 授权认证服务配置.
+ */
 @Configuration
+//开启认证服务
 @EnableAuthorizationServer
 @EnableConfigurationProperties(OAuth2ClientProperties.class)
 public class AuthorizationServerConfiguration extends AuthorizationServerConfigurerAdapter {
@@ -30,12 +35,14 @@ public class AuthorizationServerConfiguration extends AuthorizationServerConfigu
     AuthenticationManager authenticationManager;
     @Autowired
     RedisConnectionFactory redisConnectionFactory;
-
     @Autowired
     PasswordEncoder passwordEncoder;
 
     @Autowired
     private OAuth2ClientProperties oAuth2ClientProperties;
+
+    @Autowired
+    private OauthUserDetailsServiveImpl oauthUserDetailsServive;
 
     @RefreshScope
     @Override
@@ -118,8 +125,13 @@ public class AuthorizationServerConfiguration extends AuthorizationServerConfigu
     @Override
     public void configure(AuthorizationServerEndpointsConfigurer endpoints) {
         endpoints
+                //用户管理
+                .userDetailsService(oauthUserDetailsServive)
+                //token存到redis
                 .tokenStore(new RedisTokenStore(redisConnectionFactory))
+                //启用oauth2管理
                 .authenticationManager(authenticationManager)
+                //接收GET和POST
                 .allowedTokenEndpointRequestMethods(HttpMethod.GET, HttpMethod.POST);
     }
 

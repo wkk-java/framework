@@ -1,13 +1,14 @@
 package com.wk.service.impl;
 
 import com.alibaba.fastjson.JSONObject;
+import com.wk.common.exception.BusinessRuntimeException;
+import com.wk.common.exception.ExceptionType;
 import com.wk.feign.UserInfoFeignService;
 import com.wk.model.UserInfo;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 /**
@@ -17,16 +18,27 @@ import org.springframework.stereotype.Service;
  */
 @Log4j2
 @Service
-public class SysUserDetailsServiveImpl implements UserDetailsService {
+public class OauthUserDetailsServiveImpl implements UserDetailsService {
 
+    /**
+     * .
+     */
     @Autowired
     private UserInfoFeignService userInfoFeignService;
 
     @Override
-    public UserDetails loadUserByUsername(String userName) throws UsernameNotFoundException {
+    public UserDetails loadUserByUsername(String userName) {
         Object userObject = userInfoFeignService.loadUserByUsername(userName);
+        if (userObject instanceof BusinessRuntimeException) {
+            String msg = ((BusinessRuntimeException) userObject).getMessage();
+            throw new BusinessRuntimeException(ExceptionType.REMARK, msg);
+        }
         UserInfo userInfo = JSONObject.parseObject(userObject.toString(), UserInfo.class);
         log.info(JSONObject.toJSONString(userInfo));
+//        return new User(userInfo.getUsername(), userInfo.getPassword(), true,
+//                false,
+//                true,
+//                true, userInfo.getAuthorities());
         return userInfo;
     }
 
