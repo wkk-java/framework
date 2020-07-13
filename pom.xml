@@ -67,7 +67,7 @@
                     <artifactId>spring-boot-maven-plugin</artifactId>
                     <version>2.1.8.RELEASE</version>
                     <configuration>
-                        <mainClass>com.wk.Application</mainClass>
+                        <mainClass>Application</mainClass>
                         <layout>ZIP</layout>
                         <attach>false</attach>
                     </configuration>

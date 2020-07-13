@@ -1,8 +1,10 @@
 package com.wk.sys.mapper.base;
 
-import com.wk.sys.model.base.SysUserRole;
 import com.wk.sys.model.base.SysUserRoleExample;
+import com.wk.sys.model.base.SysUserRole;
+
 import java.util.List;
+
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.session.RowBounds;
