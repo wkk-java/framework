@@ -3,6 +3,7 @@ package com.wk.oauth.config;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.ProviderManager;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
@@ -18,6 +19,7 @@ import org.springframework.security.oauth2.provider.ClientDetailsService;
 import org.springframework.security.oauth2.provider.client.JdbcClientDetailsService;
 import org.springframework.security.oauth2.provider.token.TokenStore;
 import org.springframework.security.oauth2.provider.token.store.JdbcTokenStore;
+import org.springframework.security.oauth2.provider.token.store.redis.RedisTokenStore;
 import org.springframework.security.web.authentication.logout.LogoutSuccessHandler;
 
 import javax.sql.DataSource;
@@ -39,8 +41,14 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     public UserDetailsService userDetailsService;
 
+//    @Autowired
+//    private LogoutSuccessHandler logoutSuccessHandler;
+
+    /**
+     * redis工厂，默认使用lettue
+     */
     @Autowired
-    private LogoutSuccessHandler logoutSuccessHandler;
+    public RedisConnectionFactory redisConnectionFactory;
 
     /**
      * 密码编码验证器
@@ -52,14 +60,18 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         return new BCryptPasswordEncoder();
     }
 
+
+//    @Bean
+//    public TokenStore tokenStore() {
+//        RedisTokenStore tokenStore = new RedisTokenStore(redisConnectionFactory);
+//        //设置redis token存储中的前缀
+//        tokenStore.setPrefix("auth-token:");
+//        return tokenStore;
+//    }
+
     @Bean
     public TokenStore tokenStore() {
         return new JdbcTokenStore(dataSource);
-    }
-
-    @Bean
-    public ClientDetailsService jdbcClientDetailsService() {
-        return new JdbcClientDetailsService(dataSource);
     }
 
     @Bean
