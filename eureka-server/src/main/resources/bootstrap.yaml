@@ -15,17 +15,20 @@ spring:
 eureka:
   client:
     #由于该应用为注册中心,设置为false,表明不向注册中心注册自己
-    register-with-eureka: false
-    fetch-registry: false
+    register-with-eureka: true
+    fetch-registry: true
     registry-fetch-interval-seconds: 10
     service-url:
       defaultZone: ${EUREKA_SERVER_LIST:http://eureka1:2001/eureka/}
   server:
+    #自我保护开关,关闭将保证不可用服务会及时剔除
     enable-self-preservation: true
     eviction-interval-timer-in-ms: 10000
-    #是否从eureka服务器获取注册信息，这里不需要
-  instance:
+
+  instance: #心跳检测与续约时间
+    #客户端向服务端发送心跳的时间间隔,单位秒
     lease-renewal-interval-in-seconds: 5
+    #服务端收到最后一次心跳后等待的时间上线,单位秒
     lease-expiration-duration-in-seconds: 10
     hostname: ${EUREKA_HOST_NAME:eureka1}
     prefer-ip-address: true
