@@ -54,7 +54,7 @@ public class PreFilter extends ZuulFilter {
 
         log.info("token:{}", request.getHeader("token"));
 
-        String token = request.getParameter("token");
+        String token = request.getHeader("token");
         if (StringUtils.isEmpty(token)) {
             log.warn("token is empty");
             requestContext.setSendZuulResponse(false);

@@ -29,6 +29,7 @@ public class AuthorizationServerConfiguration extends AuthorizationServerConfigu
     public DataSource oauthDataSource() {
         return DataSourceBuilder.create().build();
     }
+
     @Autowired
     private AuthenticationManager authenticationManager;
 
@@ -58,13 +59,13 @@ public class AuthorizationServerConfiguration extends AuthorizationServerConfigu
     }
 
     @Override
-    public void configure(AuthorizationServerSecurityConfigurer oauthServer) throws Exception {
+    public void configure(AuthorizationServerSecurityConfigurer oauthServer) {
         oauthServer.allowFormAuthenticationForClients();
         oauthServer.checkTokenAccess("permitAll()");
     }
 
     @Override
-    public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
+    public void configure(AuthorizationServerEndpointsConfigurer endpoints) {
         endpoints
                 .approvalStore(approvalStore())
                 .authorizationCodeServices(authorizationCodeServices())

@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class Test1 {
     @Value("${spring.application.name:defaultName}")
     private String appName;
-    @Value("${application.author.address:defaultAddr}")
+    @Value("${spring.application.author.address:defaultAddr}")
     private String address;
 
     @Value("${server.port}")

@@ -1,6 +1,9 @@
 package com.wk.oauth.config;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -11,21 +14,26 @@ import org.springframework.security.oauth2.provider.token.TokenStore;
 
 @EnableResourceServer
 @Configuration
+@RefreshScope
 public class ResourcesServerConfiguration  extends ResourceServerConfigurerAdapter {
 
     @Autowired
     private TokenStore tokenStore;
 
-    @Override
-    public void configure(ResourceServerSecurityConfigurer resources)throws Exception{
-        resources.resourceId("oauth_id").tokenStore(tokenStore);
+    @Value("${spring.scurity.oauth.registResourceIds: oauth}")
+    private String registResourceIds;
 
+    @Override
+    public void configure(ResourceServerSecurityConfigurer resources){
+        if (StringUtils.isNotBlank(registResourceIds)) {
+            for (String resourceId : registResourceIds.split(",")) {
+                resources.resourceId(resourceId);
+            }
+        }
+        resources.tokenStore(tokenStore);
     }
     @Override
-
     public void configure(HttpSecurity http) throws Exception{
-
-
         http
                 .authorizeRequests()
                 .antMatchers(HttpMethod.GET, "/**").access("#oauth2.hasScope('read')")
@@ -34,7 +42,6 @@ public class ResourcesServerConfiguration  extends ResourceServerConfigurerAdapt
                 .antMatchers(HttpMethod.PUT, "/**").access("#oauth2.hasScope('write')")
                 .antMatchers(HttpMethod.DELETE, "/**").access("#oauth2.hasScope('write')")
                 .and()
-
                 .headers().addHeaderWriter((request, response) -> {
             response.addHeader("Access-Control-Allow-Origin", "*");
             if (request.getMethod().equals("OPTIONS")) {
