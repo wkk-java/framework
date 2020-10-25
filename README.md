@@ -1,11 +1,13 @@
-<h1>
-	<span style="line-height:1;">framework (springcloud2.x版)
-	<hr />
-	</span> 
-</h1>
 <p>
-	<table style="width:100%;" cellpadding="2" cellspacing="0" border="1" bordercolor="#000000">
+	<table style="text-align:center;width:100%;" cellpadding="2" cellspacing="0" border="1" bordercolor="#000000">
 		<tbody>
+			<tr>
+				<td style="text-align:center;" colspan="3">
+					<h1 style="text-align:center;">
+						framework (springcloud2.x版)
+					</h1>
+				</td>
+			</tr>
 			<tr>
 				<td style="text-align:center;">
 					<p style="text-align:center;">
@@ -54,13 +56,8 @@
 				</td>
 			</tr>
 			<tr>
-				<td>
-					<br />
-				</td>
-				<td>
-					1.8
-				</td>
-				<td>
+				<td colspan="3" style="text-align:center;">
+					<span style="font-size:18px;"><em><strong>插件相关依赖</strong></em></span> 
 				</td>
 			</tr>
 			<tr>
@@ -72,7 +69,7 @@
 				</td>
 				<td>
 					<p>
-						与maven命令执行绑定,自动构建docker镜像并推送到docker私服.优点:
+						google官方插件,与maven命令执行绑定,自动构建docker镜像并推送到docker私服.优点:
 					</p>
 					<p>
 						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1.本地无需docker daemon后台程序&nbsp;
@@ -87,16 +84,14 @@
 					dockercompose-maven-plugin
 				</td>
 				<td>
+					1.0.0-SNAPSHOT
 				</td>
 				<td>
 					<p>
-						自定义插件优点:与maven的执行绑定自动生成需要的容器编排yaml文件,便于更加快速智能的CI
+						自定义插件,优点:与maven的执行绑定自动生成需要的容器编排yaml文件,便于更加快速智能的CI
 					</p>
 				</td>
 			</tr>
 		</tbody>
 	</table>
-</p>
-<p>
-	<br />
 </p>
