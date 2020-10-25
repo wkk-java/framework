@@ -1,6 +1,6 @@
-# framework (springcloud版)
-author: wkk
-==================================================================
+# framework (springcloud2.x版)
+	author: wkk
+
 	SpringCloud 				GreenWich.SR6
 	SringBoot 				2.1.12.RELEASE
 	jdk 					1.8
