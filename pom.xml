@@ -16,6 +16,7 @@
         <module>spring-cloud-zuul</module>
         <module>common</module>
         <module>sys</module>
+        <module>dataway</module>
     </modules>
 
     <properties>
