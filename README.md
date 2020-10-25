@@ -1,22 +1,11 @@
 <h1>
-	<span style="line-height:1;">framework (springcloud2.x版)</span>
+	<span style="line-height:1;">framework (springcloud2.x版)
+	<hr />
+	</span> 
 </h1>
 <p>
 	<table style="width:100%;" cellpadding="2" cellspacing="0" border="1" bordercolor="#000000">
 		<tbody>
-			<tr>
-				<td style="text-align:center;">
-					<p>
-						依赖
-					</p>
-				</td>
-				<td style="text-align:center;">
-					版本<br />
-				</td>
-				<td style="text-align:center;">
-					说明
-				</td>
-			</tr>
 			<tr>
 				<td style="text-align:center;">
 					<p style="text-align:center;">
@@ -33,14 +22,14 @@
 			<tr>
 				<td style="text-align:center;">
 					<p style="text-align:left;">
-						依赖
+						<span>jdk</span> 
 					</p>
 				</td>
 				<td style="text-align:left;">
-					版本<br />
+					1.8<br />
 				</td>
 				<td style="text-align:left;">
-					说明
+					<br />
 				</td>
 			</tr>
 			<tr>
@@ -66,7 +55,7 @@
 			</tr>
 			<tr>
 				<td>
-					jdk
+					<br />
 				</td>
 				<td>
 					1.8
@@ -79,14 +68,14 @@
 					jib-maven-plugin
 				</td>
 				<td>
-					2.6
+<pre>2.6.0</pre>
 				</td>
 				<td>
 					<p>
-						与maven命令执行绑定,自动构建docker镜像并推送到docker私服.
+						与maven命令执行绑定,自动构建docker镜像并推送到docker私服.优点:
 					</p>
 					<p>
-						优点:1.本地无需docker daemon后台程序&nbsp;
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1.本地无需docker daemon后台程序&nbsp;
 					</p>
 					<p>
 						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2.增量打包(仅构建改动部分,更快速的CI)
@@ -101,10 +90,7 @@
 				</td>
 				<td>
 					<p>
-						自定义插件
-					</p>
-					<p>
-						优点:与maven的执行绑定自动生成需要的容器编排yaml文件,便于更加快速智能的CI
+						自定义插件优点:与maven的执行绑定自动生成需要的容器编排yaml文件,便于更加快速智能的CI
 					</p>
 				</td>
 			</tr>
@@ -112,11 +98,5 @@
 	</table>
 </p>
 <p>
-	========================================================================================
-</p>
-<p>
-	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;初代版本,用于生产部分功能需自己完善.
-</p>
-<p>
-	<span>=======================================================</span>=================================
+	<br />
 </p>
