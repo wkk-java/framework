@@ -1,8 +1,8 @@
 # framework (springcloud版)
-=======================================================</br>
 author: wkk</br>
+=======================================================</br>
 相关组件依赖及版本说明: </br>
-<font>SpringCloud GreenWich.SR6</font> </br>
+<h8>SpringCloud GreenWich.SR6</h8> </br>
 <h4>SringBoot 2.1.12.RELEASE</h4></br>
 <h4>jdk 1.8</h4></br>
 <h4>jib-maven-plugin</h4> </br>
