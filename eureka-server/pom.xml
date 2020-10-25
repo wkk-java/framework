@@ -39,6 +39,12 @@
                 <inherited>false</inherited>
             </plugin>
 
+
+            <plugin>
+                <groupId>com.google.cloud.tools</groupId>
+                <artifactId>jib-maven-plugin</artifactId>
+                <inherited>false</inherited>
+            </plugin>
             <plugin>
                 <groupId>com.wk</groupId>
                 <artifactId>dockercompose-maven-plugin</artifactId>

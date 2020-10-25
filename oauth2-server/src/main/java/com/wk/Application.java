@@ -7,6 +7,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 import org.springframework.cloud.openfeign.EnableFeignClients;
 
+import java.util.Collections;
+
 @Slf4j
 @EnableFeignClients
 @EnableEurekaClient
@@ -16,6 +18,7 @@ public class Application {
     public static void main(String[] args) {
         SpringApplication.run(Application.class, args);
 //        log.info("load userList：" + JSONObject.toJSONString(SysUser.getUserList()));
+        log.info("启动成功!");
     }
 
 }

@@ -1,5 +1,7 @@
 package com.wk.sys.controller;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.wk.common.exception.BusinessRuntimeException;
 import com.wk.common.exception.ExceptionType;
 import com.wk.sys.feign.FeignServiceTest;
@@ -57,6 +59,12 @@ public class UserInfoController {
     public String find() {
         log.info("begin find.....");
         return feignServiceTest.find();
+    }
+
+    public static void main(String[] args) {
+        String txt = "hello";
+        txt +="world";
+
     }
 
     @GetMapping(value = "/loadUserByUsername")
@@ -155,13 +163,21 @@ public class UserInfoController {
         return "success";
     }
 
-
-
     @GetMapping(value = "/getUserList")
     public List<SysUser> getUserList() {
         SysUserExample sysUserExample = new SysUserExample();
         sysUserExample.createCriteria().andDelFlagEqualTo(false);
         return sysUserMapper.selectByExample(sysUserExample);
+    }
+
+    @GetMapping(value = "/getUserPageList")
+    public PageInfo<SysUser> getUserList(@RequestParam(value = "pageSize") Integer pageSize,
+                                         @RequestParam(value = "pageNum") Integer pageNum) {
+        PageHelper.startPage(pageNum, pageSize);
+        SysUserExample sysUserExample = new SysUserExample();
+        sysUserExample.createCriteria().andDelFlagEqualTo(false);
+        List<SysUser> sysUsers = sysUserMapper.selectByExample(sysUserExample);
+        return new PageInfo<>(sysUsers);
     }
 
 
