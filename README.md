@@ -25,9 +25,14 @@
 	dockercompose-maven-plugin 		1.0.0-SNAPSHOT
 	
 	说明:
-	1.jib-maven-plugin:		利用google提供jib-maven-plugin的插件,绑定maven install执行,增量构建docker镜像,更快速的CI,本地无需安装docker后台程序(随处执行构建).
-					mvn clean install -Djib.skip=false -DsendCredentialsOverHttp=true -f pom.xml
-	2.dockercompose-maven-plugin:	利用自定义的dockercompose-maven-plugin插件,绑定maven install执行,为当前应用自动生成swarm yaml编排文件,结合jenkins实现更智能便捷的CD.
+	1.jib-maven-plugin:		利用google提供jib-maven-plugin的插件,绑定maven install执行,
+					执行:mvn clean install -Djib.skip=false -DsendCredentialsOverHttp=true -f pom.xml
+					优点:
+						1.增量构建docker镜像,更快速的CI.
+						2.本地无需安装docker后台程序(随处执行docker构建及推送).
+	2.dockercompose-maven-plugin:	利用自定义的dockercompose-maven-plugin插件,绑定maven install执行
+					优点:
+						1.为当前应用自动生成swarm yaml编排文件,结合jenkins实现更智能便捷的CD.
 
 
-																	**路过就给个小小的star🌟吧**
+											**路过就给个小小的🌟star吧**
