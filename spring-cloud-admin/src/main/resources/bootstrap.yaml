@@ -1,22 +1,22 @@
 spring:
   application:
     name: spring-cloud-admin
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 106.14.202.235:8848
+        metadata:
+          user:
+            name: admin
+            password: ${SECURITY_USER_PASSWORD}
   profiles:
     active:
       - secure
 server:
   port: 3001
 
-# tag::configuration-eureka[]
-eureka:
-  instance:
-    leaseRenewalIntervalInSeconds: 10
-    health-check-url-path: /actuator/health
-    status-page-url: /actuator/info
-  client:
-    registryFetchIntervalSeconds: 5
-    serviceUrl:
-      defaultZone: ${eureka_server:http://admin:${SECURITY_USER_PASSWORD}@jr-server:2002/eureka/}
+logging:
+  file: /Users/vince/Documents/workspace/logs/admin.log
 
 management:
   endpoints:
@@ -26,11 +26,10 @@ management:
   endpoint:
     health:
       show-details: ALWAYS
-# end::configuration-eureka[]
-
 ---
 spring:
   profiles: insecure
+...
 
 ---
 spring:
@@ -39,9 +38,4 @@ spring:
     user:
       name: admin
       password: ${SECURITY_USER_PASSWORD}
-# 注册给eureka的时候告诉eureka自己的密码
-eureka:
-  instance:
-    metadata-map:
-      user.name: admin         #These two are needed so that the server can access the protected client endpoints
-      user.password: ${SECURITY_USER_PASSWORD}
+...

@@ -1,8 +1,8 @@
 package com.wk.zuul.exception;
 
-import com.wk.common.exception.BusinessRuntimeException;
-import com.wk.common.exception.ResultEnum;
-import com.wk.common.exception.ResultView;
+import com.wk.constants.enums.ResultEnum;
+import com.wk.entity.exception.BusinessRuntimeException;
+import com.wk.entity.result.ResultView;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;

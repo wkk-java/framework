@@ -1,9 +1,9 @@
 package com.wk.oauth.service.impl;
 
 import com.alibaba.fastjson.JSONObject;
+import com.wk.entity.exception.BusinessRuntimeException;
+import com.wk.entity.exception.ExceptionType;
 import com.wk.oauth.feign.UserInfoFeignService;
-import com.wk.common.exception.BusinessRuntimeException;
-import com.wk.common.exception.ExceptionType;
 import com.wk.oauth.model.UserInfo;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;

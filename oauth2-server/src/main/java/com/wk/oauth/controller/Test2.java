@@ -1,8 +1,8 @@
 package com.wk.oauth.controller;
 
+import com.wk.entity.exception.BusinessRuntimeException;
+import com.wk.entity.exception.ExceptionType;
 import com.wk.oauth.feign.UserInfoFeignService;
-import com.wk.common.exception.BusinessRuntimeException;
-import com.wk.common.exception.ExceptionType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.context.config.annotation.RefreshScope;

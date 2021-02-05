@@ -1,8 +1,8 @@
 package com.wk.zuul.filter;
 
 import com.netflix.zuul.context.RequestContext;
-import com.wk.common.exception.BusinessRuntimeException;
-import com.wk.common.exception.ExceptionType;
+import com.wk.entity.exception.BusinessRuntimeException;
+import com.wk.entity.exception.ExceptionType;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.cloud.netflix.zuul.filters.post.SendErrorFilter;
@@ -31,7 +31,7 @@ public class GlobalExceptionFilter extends SendErrorFilter {
         // only forward to errorPath if it hasn't been forwarded to already
         boolean shouldFilter = ctx.getThrowable() != null && !ctx.getBoolean(SEND_ERROR_FILTER_RAN, false);
         logger.info("全局异常捕捉 shouldFilter..{0}", shouldFilter);
-        return  shouldFilter;
+        return shouldFilter;
     }
 
     @Override

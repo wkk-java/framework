@@ -92,7 +92,12 @@
 
         <dependency>
             <groupId>com.wk</groupId>
-            <artifactId>common</artifactId>
+            <artifactId>common-constants</artifactId>
+            <version>2.1.6-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>com.wk</groupId>
+            <artifactId>common-spring</artifactId>
             <version>2.1.6-SNAPSHOT</version>
         </dependency>
 
