@@ -1,4 +1,4 @@
-package com.wk.oauth.config;
+package com.wk.config.conf;
 
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 

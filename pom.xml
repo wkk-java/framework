@@ -12,10 +12,11 @@
         <module>oauth2-server</module>
         <module>eureka-server</module>
         <module>config-server</module>
-        <module>spring-cloud-admin</module>
-        <module>spring-cloud-zuul</module>
+        <module>admin-server</module>
+        <module>zuul-server</module>
         <module>dataway</module>
         <module>commons</module>
+        <module>learning</module>
     </modules>
 
     <properties>
@@ -26,12 +27,10 @@
         <spring-boot.version>2.1.15.RELEASE</spring-boot.version>
         <spring.cloud.alibaba.version>2.1.0.RELEASE</spring.cloud.alibaba.version>
         <dockerNexusServer>wk-aliyun</dockerNexusServer>
-<!--
-        <dockerNexusServer>106.14.202.235</dockerNexusServer>
--->
         <dockerNexusServerPort>18082</dockerNexusServerPort>
         <kotlin.version>1.4.30-RC</kotlin.version>
         <jib.skip>true</jib.skip>
+        <mainClass>com.wk.@project.parent.artifactId@.Application</mainClass>
     </properties>
     <dependencyManagement>
         <dependencies>
@@ -98,9 +97,9 @@
                     <artifactId>spring-boot-maven-plugin</artifactId>
                     <version>2.1.8.RELEASE</version>
                     <configuration>
-                        <mainClass>Application</mainClass>
                         <layout>ZIP</layout>
                         <attach>false</attach>
+                        <mainClass>${mainClass}</mainClass>
                     </configuration>
                     <executions>
                         <execution>
@@ -120,44 +119,44 @@
                     </executions>
                 </plugin>
 
-                <plugin>
-                    <groupId>com.spotify</groupId>
-                    <artifactId>docker-maven-plugin</artifactId>
-                    <version>1.2.2</version>
-                    <executions>
-                        <execution>
-                            <phase>install</phase>
-                            <goals>
-                                <goal>build</goal>
-                                <goal>push</goal>
-                            </goals>
-                            <configuration>
-                                <skipDockerBuild>${docker.skipDockerBuild}</skipDockerBuild>
-                                <skipDockerPush>${docker.skipDockerPush}</skipDockerPush>
-                                <imageName>${dockerNexusServer}:${dockerNexusServerPort}/${project.artifactId}:${project.version}</imageName>
-                                <imageTags>
-                                    <imageTag>${project.version}</imageTag>
-                                </imageTags>
-                                <registryUrl>http://${dockerNexusServer}:${dockerNexusServerPort}</registryUrl>
-                            </configuration>
-                        </execution>
-                    </executions>
-                    <configuration>
-                        <baseImage>${dockerNexusServer}:${dockerNexusServerPort}/jre:8</baseImage>
-                        <entryPoint>["java", "-jar", "/${project.build.finalName}.jar"]</entryPoint>
-                        <env>
-                        </env>
-                        <resources>
-                            <resource>
-                                <targetPath>/</targetPath>
-                                <directory>${project.build.directory}</directory>
-                                <include>${project.build.finalName}.jar</include>
-                            </resource>
-                        </resources>
-                        <forceTags>true</forceTags>
-                        <serverId>central</serverId>
-                    </configuration>
-                </plugin>
+<!--                <plugin>-->
+<!--                    <groupId>com.spotify</groupId>-->
+<!--                    <artifactId>docker-maven-plugin</artifactId>-->
+<!--                    <version>1.2.2</version>-->
+<!--                    <executions>-->
+<!--                        <execution>-->
+<!--                            <phase>install</phase>-->
+<!--                            <goals>-->
+<!--                                <goal>build</goal>-->
+<!--                                <goal>push</goal>-->
+<!--                            </goals>-->
+<!--                            <configuration>-->
+<!--                                <skipDockerBuild>${docker.skipDockerBuild}</skipDockerBuild>-->
+<!--                                <skipDockerPush>${docker.skipDockerPush}</skipDockerPush>-->
+<!--                                <imageName>${dockerNexusServer}:${dockerNexusServerPort}/${project.artifactId}:${project.version}</imageName>-->
+<!--                                <imageTags>-->
+<!--                                    <imageTag>${project.version}</imageTag>-->
+<!--                                </imageTags>-->
+<!--                                <registryUrl>http://${dockerNexusServer}:${dockerNexusServerPort}</registryUrl>-->
+<!--                            </configuration>-->
+<!--                        </execution>-->
+<!--                    </executions>-->
+<!--                    <configuration>-->
+<!--                        <baseImage>${dockerNexusServer}:${dockerNexusServerPort}/jre:8</baseImage>-->
+<!--                        <entryPoint>["java", "-jar", "/${project.build.finalName}.jar"]</entryPoint>-->
+<!--                        <env>-->
+<!--                        </env>-->
+<!--                        <resources>-->
+<!--                            <resource>-->
+<!--                                <targetPath>/</targetPath>-->
+<!--                                <directory>${project.build.directory}</directory>-->
+<!--                                <include>${project.build.finalName}.jar</include>-->
+<!--                            </resource>-->
+<!--                        </resources>-->
+<!--                        <forceTags>true</forceTags>-->
+<!--                        <serverId>central</serverId>-->
+<!--                    </configuration>-->
+<!--                </plugin>-->
                 <!--
                 mvn compile jib:buildTar
                 将镜像生成tar文件，保存在项目的target目录下
@@ -181,29 +180,25 @@
                         </from>
                         <to>
                             <image>${dockerNexusServer}:${dockerNexusServerPort}/${project.artifactId}:${project.version}</image>
-                            <auth>
-                                <username>wk</username>
-                                <password>wk2020</password>
-                            </auth>
                         </to>
                         <!--container节点用来设置容器的属性，例如对外暴露的端口、jvm参数等-->
                         <container>
                             <!--jvm启动参数-->
                             <jvmFlags>
-                                <jvmFlag>-Xms512m</jvmFlag>
-                                <jvmFlag>-Xmx512m</jvmFlag>
+<!--                                <jvmFlag>-Xms512m</jvmFlag>-->
+<!--                                <jvmFlag>-Xmx512m</jvmFlag>-->
                                 <jvmFlag>-Djava.awt.headless=true</jvmFlag>
                                 <jvmFlag>-Duser.timezone=GMT+08</jvmFlag>  <!-- 设置时区 -->
                             </jvmFlags>
                             <!--要暴露的端口-->
                             <ports>
-                                <port>2000</port>
+                                <port>3004</port>
                             </ports>
                             <!--使用该参数将镜像的创建时间与系统时间一致-->
                             <!--<useCurrentTimestamp>true</useCurrentTimestamp>-->
                             <creationTime>USE_CURRENT_TIMESTAMP</creationTime>
                             <!--解决Could not find or load main class ${start-class} -->
-                            <mainClass>com.wk.sys.Application</mainClass>
+                            <mainClass>${mainClass}</mainClass>
                             <!-- 设置时区  -->
                             <environment>
                                 <TZ>Asia/Shanghai</TZ>
@@ -244,17 +239,34 @@
         </pluginManagement>
 
         <plugins>
-
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
-                <version>2.3.8.RELEASE</version>
+                <configuration>
+                    <layout>ZIP</layout>
+                    <attach>false</attach>
+                    <mainClass>${mainClass}</mainClass>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>compile</id>
+                        <phase>compile</phase>
+                        <goals>
+                            <goal>build-info</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>package</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>repackage</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
-
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.8.1</version>
                 <configuration>
                     <source>${java.version}</source>
                     <target>${java.version}</target>
@@ -333,7 +345,6 @@
             </plugin>
 
         </plugins>
-        <!--重要 如果不设置resource 会导致application.yaml中的@@找不到pom文件中的配置-->
         <resources>
             <resource>
                 <directory>src/main/resources</directory>

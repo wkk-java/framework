@@ -11,7 +11,7 @@ spring:
   profiles: dev
   cloud:
     nacos:
-      server_address: ${NACOS_SERVER_ADDRESS:wk-server:8848}
+      server_address: wk-server:8848
       group: DEFAULT_GROUP
       namespace: dev
       username: nacos
@@ -23,7 +23,7 @@ spring:
   profiles: test
   cloud:
     nacos:
-      server_address: ${NACOS_SERVER_ADDRESS:wk-server:8848}
+      server_address: wk-server:8848
       group: DEFAULT_GROUP
       namespace: test
       username: nacos
@@ -51,6 +51,7 @@ spring:
         file-extension: yaml
         prefix: ${spring.application.name}
         group: ${spring.cloud.nacos.group}
+        namespace: ${spring.cloud.nacos.namespace}
         # 最大重试次数
         max-retry: 10
         # 自动刷新
@@ -67,7 +68,6 @@ spring:
             refresh: true
         username: ${spring.cloud.nacos.username}
         password: ${spring.cloud.nacos.password}
-        namespace: ${spring.cloud.nacos.namespace}
       discovery:
         server-addr: ${spring.cloud.nacos.server_address}
         username: ${spring.cloud.nacos.username}

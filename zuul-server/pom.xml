@@ -8,18 +8,18 @@
         <version>2.1.6-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
-    <artifactId>config-server</artifactId>
-    <name>config</name>
+    <artifactId>zuul-server</artifactId>
+    <name>zuul-server</name>
     <version>2.1.6-SNAPSHOT</version>
 
     <properties>
-        <mainClass>com.wk.config.Application</mainClass>
+        <mainClass>com.wk.zuul.Application</mainClass>
     </properties>
 
     <dependencies>
         <dependency>
             <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-config-server</artifactId>
+            <artifactId>spring-cloud-config-client</artifactId>
         </dependency>
         <dependency>
             <groupId>org.springframework.cloud</groupId>
@@ -27,29 +27,33 @@
         </dependency>
         <dependency>
             <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-bus-amqp</artifactId>
+            <artifactId>spring-cloud-starter-netflix-zuul</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.wk</groupId>
+            <artifactId>common-constants</artifactId>
+            <version>2.1.6-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>com.wk</groupId>
+            <artifactId>common-spring</artifactId>
+            <version>2.1.6-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-core</artifactId>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-actuator</artifactId>
         </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-security</artifactId>
-        </dependency>
     </dependencies>
+
     <build>
         <plugins>
             <plugin>
-                <groupId>com.spotify</groupId>
-                <artifactId>docker-maven-plugin</artifactId>
-                <inherited>false</inherited>
-            </plugin>
-
-            <plugin>
-                <groupId>com.wk</groupId>
-                <artifactId>dockercompose-maven-plugin</artifactId>
-                <inherited>false</inherited>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
         </plugins>
     </build>

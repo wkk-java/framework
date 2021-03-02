@@ -13,6 +13,10 @@
     <name>oauth2</name>
     <version>2.1.6-SNAPSHOT</version>
 
+    <properties>
+        <mainClass>com.wk.oauth.Application</mainClass>
+    </properties>
+
     <dependencies>
         <dependency>
             <groupId>org.springframework.boot</groupId>

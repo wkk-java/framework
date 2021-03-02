@@ -1,0 +1,50 @@
+server:
+  port: 3001
+
+spring:
+  application:
+    name: @project.name@
+  profiles:
+    active:
+      - dev
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    health:
+      show-details: ALWAYS
+---
+spring:
+  profiles: prod
+  security:
+    user:
+      name: ${SECURITY_USER_NAME:admin}
+      password: ${SECURITY_USER_PASSWORD}
+  cloud:
+    nacos:
+      discovery:
+        server-addr: ${NACOS_SERVER_ADDRESS:wk-server:8848}
+        metadata:
+          user:
+            name: ${SECURITY_USER_NAME:admin}
+            password: ${SECURITY_USER_PASSWORD}
+...
+
+---
+spring:
+  profiles: dev
+  security:
+    user:
+      name: admin
+      password: ${SECURITY_USER_PASSWORD}
+  cloud:
+    nacos:
+      discovery:
+        server-addr: ${NACOS_SERVER_ADDRESS:wk-server:8848}
+        metadata:
+          user:
+            name: admin
+            password: ${SECURITY_USER_PASSWORD}
+...
