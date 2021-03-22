@@ -30,7 +30,7 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Bean
     @Override
-    public UserDetailsService userDetailsServiceBean() throws Exception {
+    public UserDetailsService userDetailsServiceBean() {
         return userDetailsServive;
     }
 

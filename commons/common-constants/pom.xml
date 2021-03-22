@@ -5,10 +5,11 @@
     <parent>
         <artifactId>commons</artifactId>
         <groupId>com.wk</groupId>
-        <version>2.1.6-SNAPSHOT</version>
+        <version>1.0.0-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
+    <version>1.0.0-SNAPSHOT</version>
     <artifactId>common-constants</artifactId>
 
 </project>

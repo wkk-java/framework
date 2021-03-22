@@ -1,12 +1,12 @@
 server:
   port: 3001
-
 spring:
   application:
     name: @project.name@
   profiles:
     active:
       - dev
+
 management:
   endpoints:
     web:
@@ -15,9 +15,16 @@ management:
   endpoint:
     health:
       show-details: ALWAYS
+    logfile:
+      externalFile: ${logging.file}
+
+logging:
+  file: /usr/workspace/logs/${spring.application.name}.log
+  level:
+    root: info
 ---
 spring:
-  profiles: prod
+  profiles: dev
   security:
     user:
       name: ${SECURITY_USER_NAME:admin}
@@ -25,26 +32,11 @@ spring:
   cloud:
     nacos:
       discovery:
-        server-addr: ${NACOS_SERVER_ADDRESS:wk-server:8848}
+        namespace: ${NACOS_SERVER_NAMESPACE:dev}
+        server-addr: ${NACOS_SERVER_ADDRESS:wk-server1:2000}
         metadata:
           user:
             name: ${SECURITY_USER_NAME:admin}
             password: ${SECURITY_USER_PASSWORD}
-...
 
----
-spring:
-  profiles: dev
-  security:
-    user:
-      name: admin
-      password: ${SECURITY_USER_PASSWORD}
-  cloud:
-    nacos:
-      discovery:
-        server-addr: ${NACOS_SERVER_ADDRESS:wk-server:8848}
-        metadata:
-          user:
-            name: admin
-            password: ${SECURITY_USER_PASSWORD}
 ...

@@ -1,50 +1,80 @@
-spring:
-  application:
-    name: oauth2
-  main:
-    allow-bean-definition-overriding: true
+---
 server:
   port: 2020
-
-application:
-  init:
-    users[0]:
-      username: admin
-      password: '{bcrypt}$2a$10$tMSDLeQjFehV8Z1BxoU3quISNyLXXMDI8pdA3RKdwqv1ujuZ6AAQG'
-      authorities: admin
-      roles: admin,test-admin
-    users[1]:
-      username: test-admin
-      password: '{bcrypt}$2a$10$tMSDLeQjFehV8Z1BxoU3quISNyLXXMDI8pdA3RKdwqv1ujuZ6AAQG'
-      authorities: admin
-      roles: test-admin
-
-logging.level.org.springframework.security: DEBUG
----
 spring:
+  application:
+    name: @project.name@
   profiles:
-    active: ${SPRING_PROFILES_ACTIVE:master}
+    active: ${SPRING_PROFILES_ACTIVE:dev}
+  main:
+    allow-bean-definition-overriding: true
 ...
 
 ---
 spring:
-  profiles: master
+  profiles: dev
   cloud:
-    config:
-      uri: ${configserverurl:http://admin:${SECURITY_USER_PASSWORD}@jr-server:2010}
-      username: admin
+    nacos:
+      server_address: wk-server:8848
+      group: DEFAULT_GROUP
+      namespace: dev
+      username: nacos
+      password: ${SECURITY_USER_PASSWORD}
+...
+
+---
+spring:
+  profiles: test
+  cloud:
+    nacos:
+      server_address: wk-server:8848
+      group: DEFAULT_GROUP
+      namespace: test
+      username: nacos
+      password: ${SECURITY_USER_PASSWORD}
+...
+
+---
+spring:
+  profiles: prod
+  cloud:
+    nacos:
+      server_address: ${NACOS_SERVER_ADDRESS:wk-server:8848}
+      group: ${NACOS_GROUP:DEFAULT_GROUP}
+      namespace: prod
+      username: ${NACOS_USERNAME:nacos}
       password: ${SECURITY_USER_PASSWORD}
 ...
 
 ---
 spring:
   cloud:
-    config:
-      profile: ${PROFILE:mac}
-      label: ${spring.profiles.active}
-      name: "@project.name@"
-      failFast: true
-      retry:
-        max-attempts: 10
-        initial-interval: 1000
+    nacos:
+      config:
+        server-addr: ${spring.cloud.nacos.server_address}
+        file-extension: yaml
+        prefix: ${spring.application.name}
+        group: ${spring.cloud.nacos.group}
+        namespace: ${spring.cloud.nacos.namespace}
+        # 最大重试次数
+        max-retry: 10
+        # 自动刷新
+        refreshEnabled: true
+        # 重试时间
+        config-retry-time: 2000
+        # 监听长轮询超时时间
+        config-long-poll-timeout: 46000
+        # 通用配置
+        shared-configs:
+          - data-id: application-common.yaml
+            group: ${spring.cloud.nacos.group}
+            namespace: ${spring.cloud.nacos.namespace}
+            refresh: true
+        username: ${spring.cloud.nacos.username}
+        password: ${spring.cloud.nacos.password}
+      discovery:
+        server-addr: ${spring.cloud.nacos.server_address}
+        username: ${spring.cloud.nacos.username}
+        password: ${spring.cloud.nacos.password}
+        namespace: ${spring.cloud.nacos.namespace}
 ...

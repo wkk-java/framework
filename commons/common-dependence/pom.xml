@@ -5,12 +5,13 @@
     <parent>
         <artifactId>commons</artifactId>
         <groupId>com.wk</groupId>
-        <version>2.1.6-SNAPSHOT</version>
+        <version>1.0.0-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>common-dependence</artifactId>
     <name>common-dependence</name>
+    <version>1.0.0-SNAPSHOT</version>
     <packaging>pom</packaging>
 
     <properties>
@@ -20,14 +21,13 @@
         <spring-cloud.version>Greenwich.SR6</spring-cloud.version>
         <spring-boot.version>2.1.15.RELEASE</spring-boot.version>
         <spring.cloud.alibaba.version>2.1.0.RELEASE</spring.cloud.alibaba.version>
-        <dockerNexusServer>wk-aliyun</dockerNexusServer>
+        <dockerNexusServer>wk-server</dockerNexusServer>
         <!--
                 <dockerNexusServer>106.14.202.235</dockerNexusServer>
         -->
         <dockerNexusServerPort>18082</dockerNexusServerPort>
         <kotlin.version>1.4.0</kotlin.version>
-        <jib.skip>true</jib.skip>
-        <mainClass>com.wk.@project.parent.artifactId@.Application</mainClass>
+        <mainClass>com.wk.Application</mainClass>
     </properties>
     <dependencyManagement>
         <dependencies>
@@ -104,6 +104,17 @@
             <artifactId>spring-cloud-starter-alibaba-sentinel</artifactId>
             <version>2.1.0.RELEASE</version>
         </dependency>
+
+        <dependency>
+            <groupId>com.alibaba.cloud</groupId>
+            <artifactId>spring-cloud-starter-alibaba-sentinel</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.alibaba.csp</groupId>
+            <artifactId>sentinel-datasource-nacos</artifactId>
+            <version>1.8.0</version>
+        </dependency>
+
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-openfeign</artifactId>
@@ -170,7 +181,7 @@
         <dependency>
             <groupId>com.wk</groupId>
             <artifactId>common-spring</artifactId>
-            <version>2.1.6-SNAPSHOT</version>
+            <version>1.0.0-SNAPSHOT</version>
         </dependency>
     </dependencies>
 
@@ -280,7 +291,7 @@
                         </from>
                         <to>
                             <image>
-                                ${dockerNexusServer}:${dockerNexusServerPort}/${project.artifactId}:${project.version}
+                                ${dockerNexusServer}:${dockerNexusServerPort}/${project.name}:${project.version}
                             </image>
                         </to>
                         <!--container节点用来设置容器的属性，例如对外暴露的端口、jvm参数等-->
@@ -459,7 +470,7 @@
         <repository>
             <id>central</id>
             <name>central</name>
-            <url>http://wk-aliyun:1000/repository/maven-public/</url>
+            <url>http://wk-server:1000/repository/maven-public/</url>
             <releases>
                 <enabled>true</enabled>
                 <updatePolicy>always</updatePolicy>
@@ -470,12 +481,12 @@
         <repository>
             <id>Releases</id>
             <name>Releases</name>
-            <url>http://wk-aliyun:1000/repository/maven-releases/</url>
+            <url>http://wk-server:1000/repository/maven-releases/</url>
         </repository>
         <snapshotRepository>
             <id>Snapshot</id>
             <name>Snapshot</name>
-            <url>http://wk-aliyun:1000/repository/maven-snapshots/</url>
+            <url>http://wk-server:1000/repository/maven-snapshots/</url>
         </snapshotRepository>
     </distributionManagement>
 
@@ -486,6 +497,7 @@
             <properties>
                 <docker.skipDockerBuild>true</docker.skipDockerBuild>
                 <docker.skipDockerPush>true</docker.skipDockerPush>
+                <jib.skip>true</jib.skip>
             </properties>
 
             <activation>
@@ -498,6 +510,7 @@
             <properties>
                 <docker.skipDockerBuild>false</docker.skipDockerBuild>
                 <docker.skipDockerPush>false</docker.skipDockerPush>
+                <jib.skip>false</jib.skip>
             </properties>
         </profile>
     </profiles>

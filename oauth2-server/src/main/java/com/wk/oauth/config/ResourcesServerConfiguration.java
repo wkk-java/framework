@@ -19,7 +19,7 @@ public class ResourcesServerConfiguration  extends ResourceServerConfigurerAdapt
     @Autowired
     private TokenStore tokenStore;
 
-    @Value("${spring.scurity.oauth.registResourceIds: oauth}")
+    @Value("${spring.scurity.oauth.registResourceIds: oauth2-server}")
     private String registResourceIds;
 
     @Override
