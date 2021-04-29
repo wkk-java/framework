@@ -289,6 +289,7 @@
 
             <!--  源码发布  -->
             <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-source-plugin</artifactId>
                 <version>3.2.1</version>
                 <configuration>
@@ -352,7 +353,6 @@
                 <filtering>true</filtering>
             </resource>
         </resources>
-        <!--重要 如果不设置resource 会导致application.yaml中的@@找不到pom文件中的配置-->
     </build>
 
     <repositories>
@@ -368,12 +368,12 @@
     </repositories>
     <distributionManagement>
         <repository>
-            <id>Releases</id>
-            <name>Releases</name>
+            <id>releases</id>
+            <name>releases</name>
             <url>http://wk-server:1000/repository/maven-releases/</url>
         </repository>
         <snapshotRepository>
-            <id>Snapshot</id>
+            <id>snapshots</id>
             <name>Snapshot</name>
             <url>http://wk-server:1000/repository/maven-snapshots/</url>
         </snapshotRepository>

@@ -20,4 +20,5 @@
         <module>common-entity</module>
         <module>common-dependence</module>
     </modules>
+
 </project>

@@ -2,13 +2,9 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-    <parent>
-        <artifactId>commons</artifactId>
-        <groupId>com.wk</groupId>
-        <version>1.0.0-SNAPSHOT</version>
-    </parent>
     <modelVersion>4.0.0</modelVersion>
 
+    <groupId>com.wk</groupId>
     <artifactId>common-dependence</artifactId>
     <name>common-dependence</name>
     <version>1.0.0-SNAPSHOT</version>
@@ -61,17 +57,6 @@
             <version>2.1.4</version>
         </dependency>
 
-        <!--<dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-security</artifactId>
-        </dependency>-->
-
-        <!-- <dependency>
-             <groupId>org.springframework.security.oauth</groupId>
-             <artifactId>spring-security-oauth2</artifactId>
-             <version>2.3.2.RELEASE</version>
-         </dependency>-->
-
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
@@ -105,10 +90,6 @@
             <version>2.1.0.RELEASE</version>
         </dependency>
 
-        <dependency>
-            <groupId>com.alibaba.cloud</groupId>
-            <artifactId>spring-cloud-starter-alibaba-sentinel</artifactId>
-        </dependency>
         <dependency>
             <groupId>com.alibaba.csp</groupId>
             <artifactId>sentinel-datasource-nacos</artifactId>
@@ -225,46 +206,7 @@
                     </executions>
                 </plugin>
 
-<!--                <plugin>-->
-<!--                    <groupId>com.spotify</groupId>-->
-<!--                    <artifactId>docker-maven-plugin</artifactId>-->
-<!--                    <version>1.2.2</version>-->
-<!--                    <executions>-->
-<!--                        <execution>-->
-<!--                            <phase>install</phase>-->
-<!--                            <goals>-->
-<!--                                <goal>build</goal>-->
-<!--                                <goal>push</goal>-->
-<!--                            </goals>-->
-<!--                            <configuration>-->
-<!--                                <skipDockerBuild>${docker.skipDockerBuild}</skipDockerBuild>-->
-<!--                                <skipDockerPush>${docker.skipDockerPush}</skipDockerPush>-->
-<!--                                <imageName>-->
-<!--                                    ${dockerNexusServer}:${dockerNexusServerPort}/${project.artifactId}:${project.version}-->
-<!--                                </imageName>-->
-<!--                                <imageTags>-->
-<!--                                    <imageTag>${project.version}</imageTag>-->
-<!--                                </imageTags>-->
-<!--                                <registryUrl>http://${dockerNexusServer}:${dockerNexusServerPort}</registryUrl>-->
-<!--                            </configuration>-->
-<!--                        </execution>-->
-<!--                    </executions>-->
-<!--                    <configuration>-->
-<!--                        <baseImage>${dockerNexusServer}:${dockerNexusServerPort}/jre:8</baseImage>-->
-<!--                        <entryPoint>["java", "-jar", "/${project.build.finalName}.jar"]</entryPoint>-->
-<!--                        <env>-->
-<!--                        </env>-->
-<!--                        <resources>-->
-<!--                            <resource>-->
-<!--                                <targetPath>/</targetPath>-->
-<!--                                <directory>${project.build.directory}</directory>-->
-<!--                                <include>${project.build.finalName}.jar</include>-->
-<!--                            </resource>-->
-<!--                        </resources>-->
-<!--                        <forceTags>true</forceTags>-->
-<!--                        <serverId>central</serverId>-->
-<!--                    </configuration>-->
-<!--                </plugin>-->
+
                 <!--
                 mvn compile jib:buildTar
                 将镜像生成tar文件，保存在项目的target目录下
@@ -381,11 +323,13 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+                <version>2.1.8.RELEASE</version>
             </plugin>
 
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.5.1</version>
             </plugin>
 
             <plugin>
@@ -402,6 +346,7 @@
 
             <!--  源码发布  -->
             <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-source-plugin</artifactId>
                 <version>3.2.1</version>
                 <configuration>
@@ -468,8 +413,8 @@
 
     <repositories>
         <repository>
-            <id>central</id>
-            <name>central</name>
+            <id>public</id>
+            <name>public</name>
             <url>http://wk-server:1000/repository/maven-public/</url>
             <releases>
                 <enabled>true</enabled>
@@ -479,13 +424,13 @@
     </repositories>
     <distributionManagement>
         <repository>
-            <id>Releases</id>
-            <name>Releases</name>
+            <id>releases</id>
+            <name>releases</name>
             <url>http://wk-server:1000/repository/maven-releases/</url>
         </repository>
         <snapshotRepository>
-            <id>Snapshot</id>
-            <name>Snapshot</name>
+            <id>snapshots</id>
+            <name>snapshot</name>
             <url>http://wk-server:1000/repository/maven-snapshots/</url>
         </snapshotRepository>
     </distributionManagement>

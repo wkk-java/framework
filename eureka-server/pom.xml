@@ -36,11 +36,11 @@
 
     <build>
         <plugins>
-            <plugin>
-                <groupId>com.spotify</groupId>
-                <artifactId>docker-maven-plugin</artifactId>
-                <inherited>false</inherited>
-            </plugin>
+<!--            <plugin>-->
+<!--                <groupId>com.spotify</groupId>-->
+<!--                <artifactId>docker-maven-plugin</artifactId>-->
+<!--                <inherited>false</inherited>-->
+<!--            </plugin>-->
 
             <plugin>
                 <groupId>com.google.cloud.tools</groupId>

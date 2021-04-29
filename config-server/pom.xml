@@ -41,12 +41,6 @@
     <build>
         <plugins>
             <plugin>
-                <groupId>com.spotify</groupId>
-                <artifactId>docker-maven-plugin</artifactId>
-                <inherited>false</inherited>
-            </plugin>
-
-            <plugin>
                 <groupId>com.wk</groupId>
                 <artifactId>dockercompose-maven-plugin</artifactId>
                 <inherited>false</inherited>
