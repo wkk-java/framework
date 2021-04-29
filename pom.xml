@@ -374,7 +374,7 @@
         </repository>
         <snapshotRepository>
             <id>snapshots</id>
-            <name>Snapshot</name>
+            <name>snapshots</name>
             <url>http://wk-server:1000/repository/maven-snapshots/</url>
         </snapshotRepository>
     </distributionManagement>

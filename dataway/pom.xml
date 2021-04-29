@@ -6,7 +6,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <artifactId>framework</artifactId>
+        <artifactId>common-dependence</artifactId>
         <groupId>com.wk</groupId>
         <version>1.0.0-SNAPSHOT</version>
     </parent>
@@ -19,26 +19,6 @@
     </properties>
 
     <dependencies>
-        <dependency>
-            <groupId>com.wk</groupId>
-            <artifactId>common-dependence</artifactId>
-            <version>1.0.0-SNAPSHOT</version>
-            <exclusions>
-                <exclusion>
-                    <groupId>org.springframework.boot</groupId>
-                    <artifactId>spring-boot-starter-data-redis</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>org.springframework.cloud</groupId>
-                    <artifactId>spring-cloud-starter-openfeign</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>org.springframework.cloud</groupId>
-                    <artifactId>spring-cloud-starter-netflix-hystrix</artifactId>
-                </exclusion>
-            </exclusions>
-        </dependency>
-
         <!-- 引入依赖hasro -->
         <dependency>
             <groupId>net.hasor</groupId>
