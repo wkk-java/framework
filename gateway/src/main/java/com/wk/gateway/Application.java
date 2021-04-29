@@ -1,13 +1,19 @@
-package com.wk.eureka;
+package com.wk.gateway;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.cloud.netflix.eureka.server.EnableEurekaServer;
 
+/**
+ * @author: vince
+ * create at: 2021/4/26 下午9:33
+ * @description: 启动类
+ */
+@Slf4j
 @SpringBootApplication
-@EnableEurekaServer
 public class Application {
     public static void main(String[] args) {
         SpringApplication.run(Application.class, args);
+        log.info("启动成功!");
     }
 }

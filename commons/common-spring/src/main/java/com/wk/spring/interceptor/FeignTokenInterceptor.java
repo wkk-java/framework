@@ -15,9 +15,6 @@ public class FeignTokenInterceptor implements RequestInterceptor {
     @Override
     public void apply(RequestTemplate template) {
         HttpServletRequest request = getServletRequest();
-        if (null == request){
-            return;
-        }
         template.header("token", getHeaders(request));
     }
 
