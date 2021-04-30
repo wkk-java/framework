@@ -31,7 +31,7 @@
         <dockerNexusServerPort>18082</dockerNexusServerPort>
         <kotlin.version>1.4.30-RC</kotlin.version>
         <jib.skip>true</jib.skip>
-        <mainClass>com.wk.@project.parent.artifactId@.Application</mainClass>
+        <mainClass>com.wk.@project.artifactId@.Application</mainClass>
     </properties>
     <dependencyManagement>
         <dependencies>
@@ -178,7 +178,6 @@
                             <!--使用该参数将镜像的创建时间与系统时间一致-->
                             <!--<useCurrentTimestamp>true</useCurrentTimestamp>-->
                             <creationTime>USE_CURRENT_TIMESTAMP</creationTime>
-                            <!--解决Could not find or load main class ${start-class} -->
                             <mainClass>${mainClass}</mainClass>
                             <!-- 设置时区  -->
                             <environment>
@@ -198,24 +197,24 @@
                     </executions>
                 </plugin>
 
-                <plugin>
-                    <groupId>com.wk</groupId>
-                    <artifactId>dockercompose-maven-plugin</artifactId>
-                    <version>1.0.0-SNAPSHOT</version>
-                    <executions>
-                        <execution>
-                            <phase>package</phase>
-                            <goals>
-                                <goal>generate</goal>
-                            </goals>
-                            <configuration>
-                                <applicationGroup>framework</applicationGroup>
-                                <dockerNexusServer>${dockerNexusServer}</dockerNexusServer>
-                                <dockerNexusServerPort>${dockerNexusServerPort}</dockerNexusServerPort>
-                            </configuration>
-                        </execution>
-                    </executions>
-                </plugin>
+<!--                <plugin>-->
+<!--                    <groupId>com.wk</groupId>-->
+<!--                    <artifactId>dockercompose-maven-plugin</artifactId>-->
+<!--                    <version>1.0.0-SNAPSHOT</version>-->
+<!--                    <executions>-->
+<!--                        <execution>-->
+<!--                            <phase>package</phase>-->
+<!--                            <goals>-->
+<!--                                <goal>generate</goal>-->
+<!--                            </goals>-->
+<!--                            <configuration>-->
+<!--                                <applicationGroup>framework</applicationGroup>-->
+<!--                                <dockerNexusServer>${dockerNexusServer}</dockerNexusServer>-->
+<!--                                <dockerNexusServerPort>${dockerNexusServerPort}</dockerNexusServerPort>-->
+<!--                            </configuration>-->
+<!--                        </execution>-->
+<!--                    </executions>-->
+<!--                </plugin>-->
             </plugins>
         </pluginManagement>
 

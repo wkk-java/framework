@@ -6,7 +6,7 @@ server:
 ---
 spring:
   profiles:
-    active: ${SPRING_PROFILES_ACTIVE:master}
+    active: ${SPRING_PROFILES_ACTIVE:dev}
   application:
     name: @project.name@
 HOSTNAME: ${spring.cloud.client.ipAddress}
@@ -14,10 +14,10 @@ HOSTNAME: ${spring.cloud.client.ipAddress}
 
 ---
 spring:
-  profiles: master
+  profiles: dev
   cloud:
     config:
-      uri: ${configserverurl:http://admin:${SECURITY_USER_PASSWORD}@jr-server:2010}
+      uri: ${configserverurl:http://admin:${SECURITY_USER_PASSWORD}@wk-server:2010}
 #      username: admin
 #      password: ${SECURITY_USER_PASSWORD}
 ...
@@ -26,7 +26,7 @@ spring:
 spring:
   cloud:
     config:
-      profile: ${envName:mac}
+      profile: ${envName:dev}
       label: ${spring.profiles.active}
       name: @project.name@
       failFast: true
@@ -35,3 +35,18 @@ spring:
         initial-interval: 1000
 ...
 
+---
+logging:
+  file:
+    name: d:/logs/${spring.application.name}.log
+spring:
+  profiles: dev
+...
+
+---
+logging:
+  file:
+    name: /usr/logs/${spring.application.name}.log
+spring:
+  profiles: test
+...

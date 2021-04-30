@@ -74,3 +74,19 @@ spring:
         password: ${spring.cloud.nacos.password}
         namespace: ${spring.cloud.nacos.namespace}
 ...
+
+---
+logging:
+  file:
+    name: d:/logs/${spring.application.name}.log
+spring:
+  profiles: dev
+...
+
+---
+logging:
+  file:
+    name: /usr/logs/${spring.application.name}.log
+spring:
+  profiles: test
+...

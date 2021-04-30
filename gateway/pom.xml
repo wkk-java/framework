@@ -12,6 +12,11 @@
     <artifactId>gateway</artifactId>
     <name>gateway</name>
 
+    <properties>
+        <mainClass>com.wk.dataway.Application</mainClass>
+        <jib.skip>true</jib.skip>
+    </properties>
+
     <dependencies>
         <dependency>
             <groupId>org.springframework.cloud</groupId>

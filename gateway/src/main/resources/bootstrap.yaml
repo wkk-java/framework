@@ -54,17 +54,17 @@ spring:
 ...
 
 ---
-logging:
-  file:
-    name: /Users/vince/logs/${spring.application.name}.log
 spring:
   profiles: dev
+logging:
+  file:
+    name: d:/logs/${spring.application.name}.log
 ...
 
 ---
-logging:
-  file:
-    name: /usr/logs/${spring.application.name}.log
 spring:
   profiles: test
+logging:
+  file:
+    name: /usr/workspace/logs/${spring.application.name}.log
 ...

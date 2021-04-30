@@ -36,7 +36,8 @@ management:
 spring:
   profiles: dev
 logging:
-  file: /Users/vince/Documents/workspace/logs/${spring.application.name}.log
+  file:
+    name: d:/logs/${spring.application.name}.log
   level:
     root: info
 ...
@@ -45,7 +46,8 @@ logging:
 spring:
   profiles: test
 logging:
-  file: /usr/workspace/logs/${spring.application.name}.log
+  file:
+    name: /usr/workspace/logs/${spring.application.name}.log
   level:
     root: info
 ...
