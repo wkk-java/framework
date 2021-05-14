@@ -99,16 +99,16 @@
             <version>2.3.1.RELEASE</version>
         </dependency>
 
-        <dependency>
-            <groupId>org.mybatis</groupId>
-            <artifactId>mybatis</artifactId>
-            <version>3.5.2</version>
-        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>org.mybatis</groupId>-->
+<!--            <artifactId>mybatis</artifactId>-->
+<!--            <version>3.5.2</version>-->
+<!--        </dependency>-->
 
         <dependency>
             <groupId>org.mybatis.spring.boot</groupId>
             <artifactId>mybatis-spring-boot-starter</artifactId>
-            <version>2.1.2</version>
+            <version>2.1.4</version>
         </dependency>
 
         <dependency>
@@ -133,7 +133,6 @@
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
-            <version>1.18.4</version>
         </dependency>
         <dependency>
             <groupId>com.alibaba</groupId>
@@ -167,6 +166,79 @@
                         <encoding>${project.build.sourceEncoding}</encoding>
                     </configuration>
                 </plugin>
+
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-resources-plugin</artifactId>
+                    <version>3.1.0</version>
+                    <configuration>
+                        <encoding>UTF-8</encoding>
+                        <nonFilteredFileExtensions>
+                            <nonFilteredFileExtension></nonFilteredFileExtension>
+                        </nonFilteredFileExtensions>
+                    </configuration>
+                </plugin>
+
+                <!--  源码发布  -->
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-source-plugin</artifactId>
+                    <version>3.2.1</version>
+                    <configuration>
+                        <attach>true</attach>
+                    </configuration>
+                    <executions>
+                        <execution>
+                            <phase>deploy</phase>
+                            <goals>
+                                <goal>jar</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                </plugin>
+
+                <!-- 子项目版本控制 -->
+                <plugin>
+                    <groupId>org.codehaus.mojo</groupId>
+                    <artifactId>versions-maven-plugin</artifactId>
+                    <version>2.7</version>
+                </plugin>
+
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-release-plugin</artifactId>
+                    <version>3.0.0-M1</version>
+                    <configuration>
+                        <allowReleasePluginSnapshot>true</allowReleasePluginSnapshot>
+                        <useReleaseProfile>true</useReleaseProfile>
+                        <tagNameFormat>@{project.version}</tagNameFormat>
+                    </configuration>
+                </plugin>
+                <plugin>
+                    <groupId>org.jetbrains.kotlin</groupId>
+                    <artifactId>kotlin-maven-plugin</artifactId>
+                    <version>${kotlin.version}</version>
+                    <executions>
+                        <execution>
+                            <id>compile</id>
+                            <phase>compile</phase>
+                            <goals>
+                                <goal>compile</goal>
+                            </goals>
+                        </execution>
+                        <execution>
+                            <id>test-compile</id>
+                            <phase>test-compile</phase>
+                            <goals>
+                                <goal>test-compile</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                    <configuration>
+                        <jvmTarget>1.8</jvmTarget>
+                    </configuration>
+                </plugin>
+
                 <plugin>
                     <groupId>org.springframework.boot</groupId>
                     <artifactId>spring-boot-maven-plugin</artifactId>
@@ -194,46 +266,47 @@
                     </executions>
                 </plugin>
 
-<!--                <plugin>-->
-<!--                    <groupId>com.spotify</groupId>-->
-<!--                    <artifactId>docker-maven-plugin</artifactId>-->
-<!--                    <version>1.2.2</version>-->
-<!--                    <executions>-->
-<!--                        <execution>-->
-<!--                            <phase>install</phase>-->
-<!--                            <goals>-->
-<!--                                <goal>build</goal>-->
-<!--                                <goal>push</goal>-->
-<!--                            </goals>-->
-<!--                            <configuration>-->
-<!--                                <skipDockerBuild>${docker.skipDockerBuild}</skipDockerBuild>-->
-<!--                                <skipDockerPush>${docker.skipDockerPush}</skipDockerPush>-->
-<!--                                <imageName>-->
-<!--                                    ${dockerNexusServer}:${dockerNexusServerPort}/${project.artifactId}:${project.version}-->
-<!--                                </imageName>-->
-<!--                                <imageTags>-->
-<!--                                    <imageTag>${project.version}</imageTag>-->
-<!--                                </imageTags>-->
-<!--                                <registryUrl>http://${dockerNexusServer}:${dockerNexusServerPort}</registryUrl>-->
-<!--                            </configuration>-->
-<!--                        </execution>-->
-<!--                    </executions>-->
-<!--                    <configuration>-->
-<!--                        <baseImage>${dockerNexusServer}:${dockerNexusServerPort}/jre:8</baseImage>-->
-<!--                        <entryPoint>["java", "-jar", "/${project.build.finalName}.jar"]</entryPoint>-->
-<!--                        <env>-->
-<!--                        </env>-->
-<!--                        <resources>-->
-<!--                            <resource>-->
-<!--                                <targetPath>/</targetPath>-->
-<!--                                <directory>${project.build.directory}</directory>-->
-<!--                                <include>${project.build.finalName}.jar</include>-->
-<!--                            </resource>-->
-<!--                        </resources>-->
-<!--                        <forceTags>true</forceTags>-->
-<!--                        <serverId>central</serverId>-->
-<!--                    </configuration>-->
-<!--                </plugin>-->
+                <plugin>
+                    <groupId>com.spotify</groupId>
+                    <artifactId>docker-maven-plugin</artifactId>
+                    <version>1.2.2</version>
+                    <executions>
+                        <execution>
+                            <phase>install</phase>
+                            <goals>
+                                <goal>build</goal>
+                                <goal>push</goal>
+                            </goals>
+                            <configuration>
+                                <skipDockerBuild>${docker.skipDockerBuild}</skipDockerBuild>
+                                <skipDockerPush>${docker.skipDockerPush}</skipDockerPush>
+                                <imageName>
+                                    ${dockerNexusServer}:${dockerNexusServerPort}/${project.artifactId}:${project.version}
+                                </imageName>
+                                <imageTags>
+                                    <imageTag>latest</imageTag>
+                                    <imageTag>${project.version}</imageTag>
+                                </imageTags>
+                                <registryUrl>http://${dockerNexusServer}:${dockerNexusServerPort}</registryUrl>
+                            </configuration>
+                        </execution>
+                    </executions>
+                    <configuration>
+                        <baseImage>${dockerNexusServer}:${dockerNexusServerPort}/jre:8</baseImage>
+                        <entryPoint>["java", "-jar", "/${project.build.finalName}.jar"]</entryPoint>
+                        <env>
+                        </env>
+                        <resources>
+                            <resource>
+                                <targetPath>/</targetPath>
+                                <directory>${project.build.directory}</directory>
+                                <include>${project.build.finalName}.jar</include>
+                            </resource>
+                        </resources>
+                        <forceTags>true</forceTags>
+                        <serverId>central</serverId>
+                    </configuration>
+                </plugin>
                 <!--
                 mvn compile jib:buildTar
                 将镜像生成tar文件，保存在项目的target目录下
@@ -250,7 +323,7 @@
                 <plugin>
                     <groupId>com.google.cloud.tools</groupId>
                     <artifactId>jib-maven-plugin</artifactId>
-                    <version>3.0.0</version>
+                    <version>2.8.0</version>
                     <configuration>
                         <!-- 由于直接mvn install会报错,需要传入参数-DsendCredentialsOverHttp=true -->
                         <skip>${jib.skip}</skip>
@@ -266,17 +339,18 @@
                                 <tag>${project.version}</tag>
                             </tags>
                             <image>
-                                ${dockerNexusServer}:${dockerNexusServerPort}/${project.name}
+                                ${dockerNexusServer}:${dockerNexusServerPort}/${project.build.finalName}
                             </image>
                         </to>
                         <!--container节点用来设置容器的属性，例如对外暴露的端口、jvm参数等-->
                         <container>
                             <!--jvm启动参数-->
                             <jvmFlags>
-<!--                                <jvmFlag>-Xms512m</jvmFlag>-->
-<!--                                <jvmFlag>-Xmx512m</jvmFlag>-->
+                                <jvmFlag>-Xms512m</jvmFlag>
+                                <jvmFlag>-Xmx512m</jvmFlag>
                                 <jvmFlag>-Djava.awt.headless=true</jvmFlag>
                                 <jvmFlag>-Duser.timezone=GMT+08</jvmFlag>  <!-- 设置时区 -->
+                                <jvmFlag>-Dfile.encoding=UTF8</jvmFlag>
                                 <jvmFlag>-DsendCredentialsOverHttp=true</jvmFlag>
                             </jvmFlags>
                             <!--要暴露的端口-->
@@ -355,84 +429,36 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
-                <version>2.1.8.RELEASE</version>
             </plugin>
 
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.5.1</version>
             </plugin>
 
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-resources-plugin</artifactId>
-                <version>3.1.0</version>
-                <configuration>
-                    <encoding>UTF-8</encoding>
-                    <nonFilteredFileExtensions>
-                        <nonFilteredFileExtension></nonFilteredFileExtension>
-                    </nonFilteredFileExtensions>
-                </configuration>
             </plugin>
 
             <!--  源码发布  -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-source-plugin</artifactId>
-                <version>3.2.1</version>
-                <configuration>
-                    <attach>true</attach>
-                </configuration>
-                <executions>
-                    <execution>
-                        <phase>deploy</phase>
-                        <goals>
-                            <goal>jar</goal>
-                        </goals>
-                    </execution>
-                </executions>
             </plugin>
             <!-- 子项目版本控制 -->
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>versions-maven-plugin</artifactId>
-                <version>2.7</version>
             </plugin>
 
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-release-plugin</artifactId>
-                <version>3.0.0-M1</version>
-                <configuration>
-                    <allowReleasePluginSnapshot>true</allowReleasePluginSnapshot>
-                    <useReleaseProfile>true</useReleaseProfile>
-                    <tagNameFormat>@{project.version}</tagNameFormat>
-                </configuration>
             </plugin>
             <plugin>
                 <groupId>org.jetbrains.kotlin</groupId>
                 <artifactId>kotlin-maven-plugin</artifactId>
-                <version>${kotlin.version}</version>
-                <executions>
-                    <execution>
-                        <id>compile</id>
-                        <phase>compile</phase>
-                        <goals>
-                            <goal>compile</goal>
-                        </goals>
-                    </execution>
-                    <execution>
-                        <id>test-compile</id>
-                        <phase>test-compile</phase>
-                        <goals>
-                            <goal>test-compile</goal>
-                        </goals>
-                    </execution>
-                </executions>
-                <configuration>
-                    <jvmTarget>1.8</jvmTarget>
-                </configuration>
             </plugin>
         </plugins>
         <resources>
