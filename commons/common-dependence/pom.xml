@@ -472,6 +472,10 @@
             <id>central</id>
             <name>central</name>
             <url>http://wk-server:1000/repository/maven-public/</url>
+            <snapshots>
+                <enabled>true</enabled>
+                <updatePolicy>always</updatePolicy>
+            </snapshots>
             <releases>
                 <enabled>true</enabled>
                 <updatePolicy>always</updatePolicy>
