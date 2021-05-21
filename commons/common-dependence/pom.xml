@@ -14,7 +14,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <java.version>1.8</java.version>
-        <spring-cloud.version>Hoxton.SR1</spring-cloud.version>
+        <spring-cloud.version>Hoxton.SR8</spring-cloud.version>
         <spring-boot.version>2.3.2.RELEASE</spring-boot.version>
         <spring.cloud.alibaba.version>2.2.5.RELEASE</spring.cloud.alibaba.version>
         <dockerNexusServer>wk-server</dockerNexusServer>
@@ -478,6 +478,20 @@
             </releases>
         </repository>
     </repositories>
+    <pluginRepositories>
+        <pluginRepository>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+            <releases>
+                <enabled>true</enabled>
+                <updatePolicy>always</updatePolicy>
+            </releases>
+            <id>central</id>
+            <name>central</name>
+            <url>http://wk-server:1000/repository/maven-public/</url>
+        </pluginRepository>
+    </pluginRepositories>
     <distributionManagement>
         <repository>
             <id>releases</id>
