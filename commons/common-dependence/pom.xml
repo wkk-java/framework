@@ -281,7 +281,7 @@
                                 <skipDockerBuild>${docker.skipDockerBuild}</skipDockerBuild>
                                 <skipDockerPush>${docker.skipDockerPush}</skipDockerPush>
                                 <imageName>
-                                    ${dockerNexusServer}:${dockerNexusServerPort}/${project.artifactId}:${project.version}
+                                    ${dockerNexusServer}:${dockerNexusServerPort}/${project.build.finalName}:${project.version}
                                 </imageName>
                                 <imageTags>
                                     <imageTag>latest</imageTag>
@@ -304,7 +304,7 @@
                             </resource>
                         </resources>
                         <forceTags>true</forceTags>
-                        <serverId>central</serverId>
+                        <serverId>${dockerNexusServer}:${dockerNexusServerPort}</serverId>
                     </configuration>
                 </plugin>
                 <!--
