@@ -36,6 +36,7 @@
             <groupId>com.wk</groupId>
             <artifactId>common-dependence</artifactId>
             <version>1.0.0-SNAPSHOT</version>
+            <type>pom</type>
         </dependency>
 
         <!-- 引入依赖hasro -->
