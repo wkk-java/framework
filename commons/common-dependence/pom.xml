@@ -471,7 +471,7 @@
         <repository>
             <id>central</id>
             <name>central</name>
-            <url>http://wk-server:1000/repository/maven-public/</url>
+            <url>http://wk-server:1000/repository/maven-central/</url>
             <snapshots>
                 <enabled>true</enabled>
                 <updatePolicy>always</updatePolicy>
@@ -493,7 +493,7 @@
             </releases>
             <id>central</id>
             <name>central</name>
-            <url>http://wk-server:1000/repository/maven-public/</url>
+            <url>http://wk-server:1000/repository/maven-central/</url>
         </pluginRepository>
     </pluginRepositories>
     <distributionManagement>

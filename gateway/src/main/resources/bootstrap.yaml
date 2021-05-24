@@ -13,6 +13,19 @@ spring:
       namespace: ${NACOS_NAMESPACE:dev}
       username: ${NACOS_USERNAME:nacos}
       password: ${SECURITY_USER_PASSWORD}
+    gateway:
+      routes:
+        - id: sys
+          uri: lb://sys-server
+          predicates:
+            - Path=/sys/**
+        - id: order
+          uri: lb://order-server
+          predicates:
+            - Path=/order/**
+      discovery:
+        locator:
+          enabled: true
 ---
 spring:
   cloud:
