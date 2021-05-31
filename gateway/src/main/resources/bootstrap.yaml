@@ -17,10 +17,18 @@ spring:
       routes:
         - id: sys
           uri: lb://sys-server
+          filters:
+            - AddRequestHeader=X-Request-Source, gateway-server
+            - AddResponseHeader=X-Request-Auther, vince
+            - StripPrefix=1 #向下游发送前,去除的路径节数 数字类型
           predicates:
             - Path=/sys/**
         - id: order
           uri: lb://order-server
+          filters:
+            - AddRequestHeader=X-Request-Source, gateway-server
+            - AddResponseHeader=X-Request-Auther, vince
+            - StripPrefix=1 #向下游发送前,去除的路径节数 数字类型
           predicates:
             - Path=/order/**
       discovery:
