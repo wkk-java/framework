@@ -1,6 +1,7 @@
-package com.wk.learning;
+package com.wk.learning.rabbitmq;
 
 import com.alibaba.fastjson.JSONObject;
+import com.wk.learning.JunitApplicationRunner;
 import com.wk.learning.config.RabbitMQConfig;
 import com.wk.order.entity.ext.OrderInfoExt;
 import lombok.extern.slf4j.Slf4j;

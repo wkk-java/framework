@@ -19,8 +19,9 @@ public class JunitApplicationRunner {
     @BeforeClass
     public static void processBeforClass() {
         log.info("processBeforClass开始执行");
-//        System.setProperty("SECURITY_USER_PASSWORD", "");
+        System.setProperty("SECURITY_USER_PASSWORD", "admin123");
         System.setProperty("spring.profiles.active", "dev");
+//        System.setProperty("SECURITY_USER_PASSWORD", "admin123");
         //mock数据
     }
 

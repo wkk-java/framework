@@ -1,7 +1,8 @@
-package com.wk.learning.config;
+package com.wk.learning.rabbitmq;
 
 import com.alibaba.fastjson.JSONObject;
 import com.rabbitmq.client.Channel;
+import com.wk.learning.config.RabbitMQConfig;
 import com.wk.order.entity.base.OrderInfo;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.core.Message;
