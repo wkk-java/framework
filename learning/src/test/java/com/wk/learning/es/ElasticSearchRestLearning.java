@@ -12,6 +12,7 @@ import org.elasticsearch.client.indices.CreateIndexResponse;
 import org.elasticsearch.common.xcontent.XContentType;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.elasticsearch.core.ElasticsearchRestTemplate;
 
 import java.io.IOException;
 import java.util.Date;
@@ -22,18 +23,9 @@ import java.util.Date;
  */
 @Slf4j
 public class ElasticSearchRestLearning extends JunitApplicationRunner {
+
     @Autowired
     private RestHighLevelClient restHighLevelClient;
-
-    @Test
-    public void createIndexTest() throws IOException {
-        // 1. 创建索引请求
-        CreateIndexRequest firstIndex = new CreateIndexRequest("index_person_info");
-        // 2. 客户端执行创建索引的请求
-        CreateIndexResponse indexResponse = restHighLevelClient.indices().create(firstIndex, RequestOptions.DEFAULT);
-        log.info("响应结果:{}", indexResponse);
-    }
-
 
     @Test
     public void addIndexTest() throws IOException {

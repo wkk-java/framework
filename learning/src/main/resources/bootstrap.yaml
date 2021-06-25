@@ -4,11 +4,7 @@ spring:
     name: @project.name@
   profiles:
     active: ${SPRING_PROFILES_ACTIVE:dev}
-  elasticsearch:
-    rest:
-      uris: http://wk-server1:9200
-      username: elastic
-      password: admin123
+
 ...
 
 ---
