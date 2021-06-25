@@ -1,4 +1,4 @@
-package com.wk.learning;
+package com.wk.learning.redis;
 
 import com.alibaba.fastjson.JSONObject;
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
@@ -7,6 +7,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.common.base.Charsets;
 import com.google.common.hash.BloomFilter;
 import com.google.common.hash.Funnels;
+import com.wk.learning.JunitApplicationRunner;
 import com.wk.order.entity.base.OrderInfo;
 import com.wk.order.entity.ext.OrderInfoExt;
 import lombok.extern.slf4j.Slf4j;
