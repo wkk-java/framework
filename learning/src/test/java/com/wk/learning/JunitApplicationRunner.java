@@ -32,7 +32,7 @@ public class JunitApplicationRunner {
         //销毁数据
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
         System.out.println(System.getenv("SECURITY_USER_PASSWORD"));
     }
 }

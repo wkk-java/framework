@@ -18,6 +18,7 @@
         <module>commons</module>
         <module>learning</module>
         <module>gateway</module>
+        <module>flink</module>
     </modules>
 
     <properties>

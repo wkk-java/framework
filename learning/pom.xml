@@ -15,6 +15,11 @@
     <name>learning</name>
     <version>1.0.0-SNAPSHOT</version>
 
+    <properties>
+        <flink.version>1.10.1</flink.version>
+        <elastic-search.version>7.13.2</elastic-search.version>
+    </properties>
+
     <dependencyManagement>
         <dependencies>
             <dependency>
@@ -58,7 +63,7 @@
         <dependency>
             <groupId>org.elasticsearch.client</groupId>
             <artifactId>elasticsearch-rest-high-level-client</artifactId>
-            <version>7.13.2</version>
+            <version>${elastic-search.version}</version>
             <exclusions>
                 <!-- 排除其他依赖引起的版本不一致 -->
                 <exclusion>
@@ -72,16 +77,36 @@
             </exclusions>
         </dependency>
 
+        <!-- 手动引入正确版本-->
         <dependency>
             <groupId>org.elasticsearch</groupId>
             <artifactId>elasticsearch</artifactId>
-            <version>7.13.2</version>
+            <version>${elastic-search.version}</version>
         </dependency>
         <dependency>
             <groupId>org.elasticsearch.client</groupId>
             <artifactId>elasticsearch-rest-client</artifactId>
-            <version>7.13.2</version>
+            <version>${elastic-search.version}</version>
         </dependency>
+
+        <dependency>
+            <groupId>org.apache.flink</groupId>
+            <artifactId>flink-java</artifactId>
+            <version>${flink.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.flink</groupId>
+            <artifactId>flink-streaming-java_2.12</artifactId>
+            <version>${flink.version}</version>
+        </dependency>
+
+        <!--        <dependency>-->
+        <!--            <groupId>org.apache.flink</groupId>-->
+        <!--            <artifactId>flink-clients_2.12</artifactId>-->
+        <!--            <version>${flink.version}</version>-->
+        <!--        </dependency>-->
+
     </dependencies>
 
     <build>

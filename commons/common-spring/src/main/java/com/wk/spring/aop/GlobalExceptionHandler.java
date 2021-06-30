@@ -17,14 +17,13 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(value = BusinessRuntimeException.class)
     public ResultView defaultErrorHandler(BusinessRuntimeException e) {
-        e.printStackTrace();
         log.error("出现错误了：", e);
         return ResultView.error(e.getCode(), e.getMessage());
     }
 
     @ExceptionHandler(value = RuntimeException.class)
     public ResultView defaultErrorHandler(RuntimeException e) {
-        e.printStackTrace();
+//        e.printStackTrace();
         createLogger(e);
         return ResultView.error(ResultEnum.CODE_666);
     }
@@ -35,9 +34,6 @@ public class GlobalExceptionHandler {
      * @param e 异常
      */
     private void createLogger(Exception e) {
-        log.info(e.getMessage());
-        log.info(e.getStackTrace()[0].toString());
-
         log.error(e.getMessage());
         for (StackTraceElement stackTraceElement : e.getStackTrace()) {
             log.error(stackTraceElement.toString());
