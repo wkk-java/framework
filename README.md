@@ -3,7 +3,11 @@
 
 ## Introduction
 基于spring-cloud-alibaba 2.2.5.RELEASE Hoxton.SR8版 及各类java中间件的架构代码
-                                                           
+* tips 启动前准备:
+1. 配置本地hosts对域名 wk-server1 的映射
+2. 按需部署nacos / mysql / redis / rabbitmq / elastic search / sentinel (前二为必须)
+3. 配置本地环境变量SECURITY_USER_PASSWORD=*** 为nacos及其他中间件的访问密码
+
 </br>
 
 ## More Details
@@ -28,7 +32,7 @@
 | 名称          | 版本           | 说明                                                         |
 | ------------- | -------------- | ------------------------------------------------------------ |
 | SringBoot    | 2.3.2.RELEASE  |                                                              |
-| SpringCloud   | 2.2.5.RELEASEHoxton.SR8     |                                                              |
+| SpringCloud   | 2.2.5.RELEASEHoxton.SR8     | 依赖参考 https://github.com/alibaba/spring-cloud-alibaba/wiki/%E7%89%88%E6%9C%AC%E8%AF%B4%E6%98%8E                                                             |
 | Nacos         | 2.0.0          | 提供包含config 配置中心与discovery 服务治理                  |
 | Sentinel      | 2.1.0.RELEASE  | 提供功能丰富的流控,降级,链路监控等      
 | Seata         | 1.4.0          | 提供四种分布式事务解决方案:AT/TCC/Saga/XA
@@ -42,7 +46,7 @@
 | Rabbtmq       | 3.8.14         | 提供direct / topic / fanout 模式的消息队列                   |
 | FastDFS       |                | 提供文件上传,下载,静态资源访问                               |
 | Mysql         |8.0.23          | 提供数据存储,查询                                            |
-| Xxl-Job       |                | 分布式任务调度                                                         |
+| Xxl-Job       |                | 国产分布式任务调度,功能丰富                                                         |
 
 
 <br/>
