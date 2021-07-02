@@ -6,7 +6,7 @@
 * tips 启动前准备:
 1. 配置本地hosts对域名 wk-server1 的映射
 2. 按需部署nacos / mysql / redis / rabbitmq / elastic search / sentinel (前二为必须)
-3. 配置本地环境变量SECURITY_USER_PASSWORD=*** 为nacos及其他中间件的访问密码
+3. 配置本地环境变量SECURITY_USER_PASSWORD=*** ,为nacos及其他中间件的访问密码
 
 </br>
 
