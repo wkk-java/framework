@@ -15,7 +15,7 @@ spring:
   profiles: dev
   cloud:
     nacos:
-      server_address: wk-server:8848
+      server_address: wk-server1:2000
       group: DEFAULT_GROUP
       namespace: dev
       username: nacos
@@ -27,7 +27,7 @@ spring:
   profiles: test
   cloud:
     nacos:
-      server_address: wk-server:8848
+      server_address: wk-server1:2000
       group: DEFAULT_GROUP
       namespace: test
       username: nacos
@@ -39,7 +39,7 @@ spring:
   profiles: prod
   cloud:
     nacos:
-      server_address: ${NACOS_SERVER_ADDRESS:wk-server:8848}
+      server_address: ${NACOS_SERVER_ADDRESS:wk-server1:2000}
       group: ${NACOS_GROUP:DEFAULT_GROUP}
       namespace: prod
       username: ${NACOS_USERNAME:nacos}

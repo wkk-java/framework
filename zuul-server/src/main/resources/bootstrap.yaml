@@ -17,7 +17,7 @@ spring:
   profiles: dev
   cloud:
     config:
-      uri: ${configserverurl:http://admin:${SECURITY_USER_PASSWORD}@wk-server:2010}
+      uri: ${configserverurl:http://admin:${SECURITY_USER_PASSWORD}@wk-server1:2000}
 #      username: admin
 #      password: ${SECURITY_USER_PASSWORD}
 ...

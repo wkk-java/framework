@@ -13,29 +13,6 @@ spring:
       namespace: ${NACOS_NAMESPACE:dev}
       username: ${NACOS_USERNAME:nacos}
       password: ${SECURITY_USER_PASSWORD}
-    gateway:
-      routes:
-        - id: sys
-          uri: lb://sys-server
-          filters:
-            - AddRequestHeader=X-Request-Source, gateway-server
-            - AddResponseHeader=X-Request-Auther, vince
-            - StripPrefix=1 #向下游发送前,去除的路径节数 数字类型
-          predicates:
-            - Path=/sys/**
-        - id: order
-          uri: lb://order-server
-          filters:
-            - AddRequestHeader=X-Request-Source, gateway-server
-            - AddResponseHeader=X-Request-Author, vince
-            - StripPrefix=1 #向下游发送前,去除的路径节数 数字类型
-          predicates:
-            - Path=/order/**
-      discovery:
-        locator:
-          enabled: true
-      default-filters: #全局过滤器
-        - DedupeResponseHeader=Access-Control-Allow-Credentials Access-Control-Allow-Origin RETAIN_UNIQUE #重复header处理
 ---
 spring:
   cloud:
