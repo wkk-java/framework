@@ -10,10 +10,12 @@ import com.google.common.hash.Funnels;
 import com.wk.learning.JunitApplicationRunner;
 import com.wk.order.entity.base.OrderInfo;
 import com.wk.order.entity.ext.OrderInfoExt;
+import io.seata.spring.boot.autoconfigure.SeataAutoConfiguration;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.data.redis.connection.BitFieldSubCommands;
 import org.springframework.data.redis.core.HashOperations;
 import org.springframework.data.redis.core.RedisCallback;
@@ -31,6 +33,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+@EnableAutoConfiguration(exclude = SeataAutoConfiguration.class)
 @Slf4j
 public class RedisLearning extends JunitApplicationRunner {
 
@@ -130,6 +133,8 @@ public class RedisLearning extends JunitApplicationRunner {
 
         Set members = redisTemplate.opsForSet().members(redisKey);
         log.info("redis set test:{}", members);
+
+        log.info("redis set contains:{}", redisTemplate.opsForSet().isMember(redisKey, "1236"));
 
         List pop = redisTemplate.opsForSet().pop(redisKey, 3000);
         log.info("redis set test pop:{}", pop);
