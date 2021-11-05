@@ -19,7 +19,7 @@ public class RabbitMQLearning extends JunitApplicationRunner {
     public void testSimple() throws Exception {
         for (int i = 0; i < 3; i++) {
             Thread.sleep(1000);
-            Object result = rabbitTemplate.convertSendAndReceive(RabbitMQConfig.EXCHANGE_USER, RabbitMQConfig.QUEUE_USER, JSONObject.toJSONString(OrderInfoExt.getTestBean("o_" + i)));
+            Object result = rabbitTemplate.convertSendAndReceive(RabbitMQConfig.EXCHANGE_USER_DIREICT, RabbitMQConfig.QUEUE_USER, JSONObject.toJSONString(OrderInfoExt.getTestBean("o_" + i)));
             log.info("send result:{}", result);
         }
         Thread.sleep(10000);

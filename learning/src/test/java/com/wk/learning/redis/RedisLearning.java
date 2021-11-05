@@ -8,9 +8,8 @@ import com.google.common.base.Charsets;
 import com.google.common.hash.BloomFilter;
 import com.google.common.hash.Funnels;
 import com.wk.learning.JunitApplicationRunner;
-import com.wk.order.entity.base.OrderInfo;
+import com.wk.order.entity.OrderInfo;
 import com.wk.order.entity.ext.OrderInfoExt;
-import io.seata.spring.boot.autoconfigure.SeataAutoConfiguration;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Before;
 import org.junit.Test;
@@ -33,7 +32,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-@EnableAutoConfiguration(exclude = SeataAutoConfiguration.class)
+@EnableAutoConfiguration
 @Slf4j
 public class RedisLearning extends JunitApplicationRunner {
 
@@ -68,8 +67,13 @@ public class RedisLearning extends JunitApplicationRunner {
     @Test
     public void testString() {
         String redisKey = "order:string:id:" + orderId;
-        OrderInfo bean = OrderInfoExt.getTestBean("123");
-        stringRedisTemplate.opsForValue().set(redisKey, JSONObject.toJSONString(bean));
+//        OrderInfo bean = OrderInfoExt.getTestBean("123");
+//        stringRedisTemplate.opsForValue().set(redisKey, JSONObject.toJSONString(bean));
+
+        stringRedisTemplate.opsForValue().increment(redisKey, 2);
+
+        System.out.println(stringRedisTemplate.opsForValue().get(redisKey));
+
     }
 
     @Test
@@ -194,6 +198,7 @@ public class RedisLearning extends JunitApplicationRunner {
         //bloomFilter.put("10086");
         log.info("redis bloom test:{}", bloomFilter.mightContain("123456"));
         log.info("redis bloom test:{}", bloomFilter.mightContain("10086"));
+
     }
 
 }

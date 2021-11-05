@@ -1,10 +1,6 @@
 package com.wk.learning.config;
 
-import org.springframework.amqp.core.Binding;
-import org.springframework.amqp.core.BindingBuilder;
-import org.springframework.amqp.core.Queue;
-import org.springframework.amqp.core.QueueBuilder;
-import org.springframework.amqp.core.TopicExchange;
+import org.springframework.amqp.core.*;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -19,7 +15,9 @@ public class RabbitMQConfig {
 
     public final static String QUEUE_USERGROUP = "queue.user.group";
 
-    public final static String EXCHANGE_USER = "exchange.user";
+    public final static String EXCHANGE_USER_TOPIC = "exchange.user";
+    public final static String EXCHANGE_USER_DIREICT = "exchange.user.direict";
+    public final static String EXCHANGE_USER_FANOUT = "exchange.user.fanout";
 
     public final static String QUEUE_USER_DEAD_LETTER = "queue.user.dead_letter";
     public final static String EXCHANGE_USER_DEAD_LETTER = "exchange.user.dead_letter";
@@ -51,8 +49,24 @@ public class RabbitMQConfig {
     }
 
     @Bean
-    public TopicExchange exchange() {
-        return new TopicExchange(EXCHANGE_USER);
+    public TopicExchange topicExchange() {
+        return new TopicExchange(EXCHANGE_USER_TOPIC);
+    }
+
+    @Bean
+    public DirectExchange directExchange(){
+        return new DirectExchange(EXCHANGE_USER_DIREICT);
+    }
+
+    @Bean
+    public FanoutExchange fanoutExchange(){
+        return new FanoutExchange(EXCHANGE_USER_FANOUT);
+    }
+
+
+    @Bean
+    public Binding bindingUserQueueDirectExchange(@Qualifier(value = QUEUE_USER) Queue queue, DirectExchange exchange) {
+        return BindingBuilder.bind(queue).to(exchange).with(QUEUE_USER);
     }
 
     @Bean
@@ -61,7 +75,17 @@ public class RabbitMQConfig {
     }
 
     @Bean
-    public Binding bindingUserGroupQueueExchange(@Qualifier(value = QUEUE_USERGROUP) Queue queue, TopicExchange exchange) {
+    public Binding bindingUserQueueFanoutExchange(@Qualifier(value = QUEUE_USER) Queue queue, FanoutExchange exchange) {
+        return BindingBuilder.bind(queue).to(exchange);
+    }
+
+    @Bean
+    public Binding bindingUserGroupQueueFanoutExchange(@Qualifier(value = QUEUE_USERGROUP) Queue queue, FanoutExchange exchange) {
+        return BindingBuilder.bind(queue).to(exchange);
+    }
+
+    @Bean
+    public Binding bindingUserGroupQueueExchange(@Qualifier(value = QUEUE_USERGROUP) Queue queue,  TopicExchange exchange) {
         //*表示一个词,#表示零个或多个词
         return BindingBuilder.bind(queue).to(exchange)
                 .with(QUEUE_USERGROUP);

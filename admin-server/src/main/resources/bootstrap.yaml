@@ -24,12 +24,20 @@ management:
   endpoints:
     web:
       exposure:
-        include: "*"
+        include: '*'
   endpoint:
     health:
       show-details: ALWAYS
     logfile:
       externalFile: ${logging.file.name}
+    restart:
+      enabled: true
+    shutdown:
+      enabled: true
+    httptrace:
+      enabled: true
+    auditevents:
+      enabled: true
 
 
 ---

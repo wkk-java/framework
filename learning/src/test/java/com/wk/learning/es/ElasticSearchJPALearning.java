@@ -32,6 +32,7 @@ public class ElasticSearchJPALearning extends JunitApplicationRunner {
         productIndex.setTitle(title == null ? "2020年冬天最流行的网红棉大衣,史上最便宜" : title);
         productIndex.setRemark("错过这一天,再等一年");
         productIndex.setCreateTime(new Date().getTime());
+        productIndex.setRemark11("hahahahhaha");
         productIndexRepository.save(productIndex);
         Thread.sleep(1000);
     }

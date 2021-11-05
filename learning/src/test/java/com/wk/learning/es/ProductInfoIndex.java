@@ -17,6 +17,9 @@ public class ProductInfoIndex {
     // 使用分词器
     @Field(type = FieldType.Text, analyzer = "ik_max_word", searchAnalyzer = "ik_max_word")
     private String title;
+    // 使用分词器
+    @Field(type = FieldType.Text, analyzer = "ik_max_word", searchAnalyzer = "ik_max_word")
+    private String remark11;
 
     @Field(type = FieldType.Keyword)
     private String name;
