@@ -5,23 +5,17 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.wk</groupId>
-    <artifactId>framework</artifactId>
-    <packaging>pom</packaging>
+    <artifactId>common-dependencies</artifactId>
+    <name>common-dependencies</name>
     <version>1.0.0-SNAPSHOT</version>
+    <packaging>pom</packaging>
+
     <modules>
-        <module>oauth2-server</module>
-<!--        <module>eureka-server</module>-->
-<!--        <module>config-server</module>-->
-        <module>admin-server</module>
-        <module>zuul-server</module>
-        <module>dataway</module>
-        <module>commons</module>
-        <module>learning</module>
-        <module>gateway</module>
-        <module>flink</module>
-        <module>file-management</module>
-        <module>auth-server</module>
         <module>common-cloud-dependency</module>
+        <module>common-dao-dependency</module>
+        <module>common-configuration</module>
+        <module>common-entity-dependency</module>
+        <module>common-constants</module>
     </modules>
 
     <properties>
@@ -33,9 +27,12 @@
         <spring.cloud.alibaba.version>2.2.5.RELEASE</spring.cloud.alibaba.version>
         <dockerNexusServer>wk-server</dockerNexusServer>
         <dockerNexusServerPort>18082</dockerNexusServerPort>
-        <kotlin.version>1.4.30-RC</kotlin.version>
-        <jib.skip>true</jib.skip>
-        <mainClass>com.wk.@project.artifactId@.Application</mainClass>
+        <fastjson.version>1.2.68</fastjson.version>
+        <nacos.version>2.1.3.RELEASE</nacos.version>
+        <lombok.version>1.18.12</lombok.version>
+        <mybatis-plus.version>3.4.3.4</mybatis-plus.version>
+        <swagger.version>1.5.24</swagger.version>
+        <mainClass>com.wk.Application</mainClass>
     </properties>
     <dependencyManagement>
         <dependencies>
@@ -63,6 +60,7 @@
         </dependencies>
     </dependencyManagement>
 
+
     <build>
         <pluginManagement>
             <plugins>
@@ -76,31 +74,7 @@
                         <encoding>${project.build.sourceEncoding}</encoding>
                     </configuration>
                 </plugin>
-                <plugin>
-                    <groupId>org.springframework.boot</groupId>
-                    <artifactId>spring-boot-maven-plugin</artifactId>
-                    <configuration>
-                        <layout>ZIP</layout>
-                        <attach>false</attach>
-                        <mainClass>${mainClass}</mainClass>
-                    </configuration>
-                    <executions>
-                        <execution>
-                            <id>compile</id>
-                            <phase>compile</phase>
-                            <goals>
-                                <goal>build-info</goal>
-                            </goals>
-                        </execution>
-                        <execution>
-                            <id>package</id>
-                            <phase>package</phase>
-                            <goals>
-                                <goal>repackage</goal>
-                            </goals>
-                        </execution>
-                    </executions>
-                </plugin>
+
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-resources-plugin</artifactId>
@@ -108,10 +82,12 @@
                     <configuration>
                         <encoding>UTF-8</encoding>
                         <nonFilteredFileExtensions>
-                            <nonFilteredFileExtension></nonFilteredFileExtension>
+                            <!--                            <nonFilteredFileExtension></nonFilteredFileExtension>-->
                         </nonFilteredFileExtensions>
                     </configuration>
                 </plugin>
+
+                <!--  源码发布  -->
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-source-plugin</artifactId>
@@ -128,6 +104,14 @@
                         </execution>
                     </executions>
                 </plugin>
+
+                <!-- 子项目版本控制 -->
+                <plugin>
+                    <groupId>org.codehaus.mojo</groupId>
+                    <artifactId>versions-maven-plugin</artifactId>
+                    <version>2.7</version>
+                </plugin>
+
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-release-plugin</artifactId>
@@ -138,6 +122,7 @@
                         <tagNameFormat>@{project.version}</tagNameFormat>
                     </configuration>
                 </plugin>
+
                 <plugin>
                     <groupId>org.springframework.boot</groupId>
                     <artifactId>spring-boot-maven-plugin</artifactId>
@@ -166,56 +151,6 @@
                 </plugin>
 
                 <plugin>
-                    <groupId>org.jetbrains.kotlin</groupId>
-                    <artifactId>kotlin-maven-plugin</artifactId>
-                    <version>${kotlin.version}</version>
-                    <executions>
-                        <execution>
-                            <id>compile</id>
-                            <phase>compile</phase>
-                            <goals>
-                                <goal>compile</goal>
-                            </goals>
-                        </execution>
-                        <execution>
-                            <id>test-compile</id>
-                            <phase>test-compile</phase>
-                            <goals>
-                                <goal>test-compile</goal>
-                            </goals>
-                        </execution>
-                    </executions>
-                    <configuration>
-                        <jvmTarget>1.8</jvmTarget>
-                    </configuration>
-                </plugin>
-
-                <plugin>
-                    <groupId>org.mybatis.generator</groupId>
-                    <artifactId>mybatis-generator-maven-plugin</artifactId>
-                    <version>1.4.0</version>
-                    <configuration>
-                        <!--配置文件的位置-->
-                        <configurationFile>src/main/resources/mybatis-generator-config.xml</configurationFile>
-                        <verbose>true</verbose>
-                        <overwrite>true</overwrite>
-                    </configuration>
-                    <dependencies>
-                        <dependency>
-                            <groupId>mysql</groupId>
-                            <artifactId>mysql-connector-java</artifactId>
-                            <version>8.0.27</version>
-                        </dependency>
-                        <!--生成代码插件-->
-                        <dependency>
-                            <groupId>org.mybatis.generator</groupId>
-                            <artifactId>mybatis-generator-core</artifactId>
-                            <version>1.4.0</version>
-                        </dependency>
-                    </dependencies>
-                </plugin>
-
-                <plugin>
                     <groupId>com.spotify</groupId>
                     <artifactId>docker-maven-plugin</artifactId>
                     <version>1.2.2</version>
@@ -229,8 +164,11 @@
                             <configuration>
                                 <skipDockerBuild>${docker.skipDockerBuild}</skipDockerBuild>
                                 <skipDockerPush>${docker.skipDockerPush}</skipDockerPush>
-                                <imageName>${dockerNexusServer}:${dockerNexusServerPort}/${project.artifactId}:${project.version}</imageName>
+                                <imageName>
+                                    ${dockerNexusServer}:${dockerNexusServerPort}/${project.build.finalName}:${project.version}
+                                </imageName>
                                 <imageTags>
+                                    <imageTag>latest</imageTag>
                                     <imageTag>${project.version}</imageTag>
                                 </imageTags>
                                 <registryUrl>http://${dockerNexusServer}:${dockerNexusServerPort}</registryUrl>
@@ -250,15 +188,18 @@
                             </resource>
                         </resources>
                         <forceTags>true</forceTags>
-                        <serverId>central</serverId>
+                        <serverId>${dockerNexusServer}:${dockerNexusServerPort}</serverId>
                     </configuration>
                 </plugin>
                 <!--
                 mvn compile jib:buildTar
                 将镜像生成tar文件，保存在项目的target目录下
-                在任何docker环境执行 docker load \-\-input xxx.tar即可导入到本地镜像仓库
+                在任何docker环境执行
+                 docker load \-\-input xxx.tar即可导入到本地镜像仓库
+
                 mvn compile jib:dockerBuild
                 将镜像存入当前镜像仓库，该仓库是当前docker客户端可以连接的docker daemon，一般是指本地镜像仓库
+
                 mvn compile jib:build
                 将镜像推送到远程仓库，仓库位置与镜像名字的前缀有关，一般是hub.docker.com或者阿里云镜像仓库，使用该参数时需要提前登录成功
                 -->
@@ -266,26 +207,35 @@
                 <plugin>
                     <groupId>com.google.cloud.tools</groupId>
                     <artifactId>jib-maven-plugin</artifactId>
-                    <version>2.6.0</version>
+                    <version>3.0.0</version>
                     <configuration>
                         <!-- 由于直接mvn install会报错,需要传入参数-DsendCredentialsOverHttp=true -->
                         <skip>${jib.skip}</skip>
+                        <!--                        <containerizingMode>packaged</containerizingMode>-->
                         <from>
                             <!-- 基于自定义的jre镜像 -->
                             <image>${dockerNexusServer}:${dockerNexusServerPort}/jre:8</image>
                         </from>
                         <to>
-                            <image>${dockerNexusServer}:${dockerNexusServerPort}/${project.artifactId}:${project.version}</image>
                             <tags>
+                                <!--tag即镜像的版本，一般是覆盖latest并且新增一个当前版本号-->
+                                <tag>latest</tag>
                                 <tag>${project.version}</tag>
                             </tags>
+                            <image>
+                                ${dockerNexusServer}:${dockerNexusServerPort}/${project.build.finalName}
+                            </image>
                         </to>
                         <!--container节点用来设置容器的属性，例如对外暴露的端口、jvm参数等-->
                         <container>
                             <!--jvm启动参数-->
                             <jvmFlags>
+                                <jvmFlag>-Xms512m</jvmFlag>
+                                <jvmFlag>-Xmx512m</jvmFlag>
                                 <jvmFlag>-Djava.awt.headless=true</jvmFlag>
                                 <jvmFlag>-Duser.timezone=GMT+08</jvmFlag>  <!-- 设置时区 -->
+                                <jvmFlag>-Dfile.encoding=UTF8</jvmFlag>
+                                <jvmFlag>-DsendCredentialsOverHttp=true</jvmFlag>
                             </jvmFlags>
                             <!--要暴露的端口-->
                             <ports>
@@ -313,23 +263,48 @@
                     </executions>
                 </plugin>
 
+                <!--                <plugin>-->
+                <!--                    <groupId>com.wk</groupId>-->
+                <!--                    <artifactId>dockercompose-maven-plugin</artifactId>-->
+                <!--                    <version>1.0.0-SNAPSHOT</version>-->
+                <!--                    <executions>-->
+                <!--                        <execution>-->
+                <!--                            <phase>package</phase>-->
+                <!--                            <goals>-->
+                <!--                                <goal>generate</goal>-->
+                <!--                            </goals>-->
+                <!--                            <configuration>-->
+                <!--                                <applicationGroup>framework</applicationGroup>-->
+                <!--                                <dockerNexusServer>${dockerNexusServer}</dockerNexusServer>-->
+                <!--                                <dockerNexusServerPort>${dockerNexusServerPort}</dockerNexusServerPort>-->
+                <!--                            </configuration>-->
+                <!--                        </execution>-->
+                <!--                    </executions>-->
+                <!--                </plugin>-->
+
                 <plugin>
-                    <groupId>com.wk</groupId>
-                    <artifactId>dockercompose-maven-plugin</artifactId>
-                    <version>1.0.0-SNAPSHOT</version>
-                    <executions>
-                        <execution>
-                            <phase>package</phase>
-                            <goals>
-                                <goal>generate</goal>
-                            </goals>
-                            <configuration>
-                                <applicationGroup>framework</applicationGroup>
-                                <dockerNexusServer>${dockerNexusServer}</dockerNexusServer>
-                                <dockerNexusServerPort>${dockerNexusServerPort}</dockerNexusServerPort>
-                            </configuration>
-                        </execution>
-                    </executions>
+                    <groupId>org.mybatis.generator</groupId>
+                    <artifactId>mybatis-generator-maven-plugin</artifactId>
+                    <version>1.4.0</version>
+                    <configuration>
+                        <!--配置文件的位置-->
+                        <configurationFile>src/main/resources/mybatis-generator-config.xml</configurationFile>
+                        <verbose>true</verbose>
+                        <overwrite>true</overwrite>
+                    </configuration>
+                    <dependencies>
+                        <dependency>
+                            <groupId>mysql</groupId>
+                            <artifactId>mysql-connector-java</artifactId>
+                            <version>8.0.27</version>
+                        </dependency>
+                        <!--生成代码插件-->
+                        <dependency>
+                            <groupId>org.mybatis.generator</groupId>
+                            <artifactId>mybatis-generator-core</artifactId>
+                            <version>1.4.0</version>
+                        </dependency>
+                    </dependencies>
                 </plugin>
             </plugins>
         </pluginManagement>
@@ -339,6 +314,7 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
+
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
@@ -353,22 +329,15 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-source-plugin</artifactId>
             </plugin>
-            <!-- 子项目版本控制 -->
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>versions-maven-plugin</artifactId>
-                <version>2.8.1</version>
             </plugin>
 
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-release-plugin</artifactId>
             </plugin>
-            <plugin>
-                <groupId>org.jetbrains.kotlin</groupId>
-                <artifactId>kotlin-maven-plugin</artifactId>
-            </plugin>
-
         </plugins>
         <resources>
             <resource>
@@ -380,9 +349,13 @@
 
     <repositories>
         <repository>
-            <id>public</id>
-            <name>public</name>
-            <url>http://wk-server:1000/repository/maven-public/</url>
+            <id>central</id>
+            <name>central</name>
+            <url>http://wk-server:1000/repository/maven-central/</url>
+            <snapshots>
+                <enabled>true</enabled>
+                <updatePolicy>always</updatePolicy>
+            </snapshots>
             <releases>
                 <enabled>true</enabled>
                 <updatePolicy>always</updatePolicy>
@@ -400,7 +373,7 @@
             </releases>
             <id>central</id>
             <name>central</name>
-            <url>http://wk-server:1000/repository/maven-public/</url>
+            <url>http://wk-server:1000/repository/maven-central/</url>
         </pluginRepository>
     </pluginRepositories>
     <distributionManagement>
@@ -423,6 +396,7 @@
             <properties>
                 <docker.skipDockerBuild>true</docker.skipDockerBuild>
                 <docker.skipDockerPush>true</docker.skipDockerPush>
+                <jib.skip>true</jib.skip>
             </properties>
 
             <activation>
@@ -435,6 +409,7 @@
             <properties>
                 <docker.skipDockerBuild>false</docker.skipDockerBuild>
                 <docker.skipDockerPush>false</docker.skipDockerPush>
+                <jib.skip>false</jib.skip>
             </properties>
         </profile>
     </profiles>

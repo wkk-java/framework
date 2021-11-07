@@ -14,11 +14,45 @@
     <packaging>pom</packaging>
 
     <modules>
-        <module>common-constants</module>
         <module>common-util</module>
-        <module>common-spring</module>
-        <module>common-entity</module>
-        <module>common-dependence</module>
+        <module>common-dependencies</module>
     </modules>
 
+    <repositories>
+        <repository>
+            <id>public</id>
+            <name>public</name>
+            <url>http://wk-server:1000/repository/maven-public/</url>
+            <releases>
+                <enabled>true</enabled>
+                <updatePolicy>always</updatePolicy>
+            </releases>
+        </repository>
+    </repositories>
+    <pluginRepositories>
+        <pluginRepository>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+            <releases>
+                <enabled>true</enabled>
+                <updatePolicy>always</updatePolicy>
+            </releases>
+            <id>central</id>
+            <name>central</name>
+            <url>http://wk-server:1000/repository/maven-public/</url>
+        </pluginRepository>
+    </pluginRepositories>
+    <distributionManagement>
+        <repository>
+            <id>releases</id>
+            <name>releases</name>
+            <url>http://wk-server:1000/repository/maven-releases/</url>
+        </repository>
+        <snapshotRepository>
+            <id>snapshots</id>
+            <name>snapshots</name>
+            <url>http://wk-server:1000/repository/maven-snapshots/</url>
+        </snapshotRepository>
+    </distributionManagement>
 </project>
