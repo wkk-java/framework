@@ -116,6 +116,12 @@
         <!--            <version>${flink.version}</version>-->
         <!--        </dependency>-->
 
+
+        <dependency>
+            <groupId>org.redisson</groupId>
+            <artifactId>redisson-all</artifactId>
+            <version>3.16.3</version>
+        </dependency>
     </dependencies>
 
     <build>
