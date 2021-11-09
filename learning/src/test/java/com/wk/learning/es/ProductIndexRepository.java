@@ -1,6 +1,5 @@
 package com.wk.learning.es;
 
-import com.github.pagehelper.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.elasticsearch.repository.ElasticsearchRepository;
@@ -24,5 +23,5 @@ public interface ProductIndexRepository extends ElasticsearchRepository<ProductI
 
     List<ProductInfoIndex> findByTitle(String title, Sort sort);
 
-    Page<ProductInfoIndex> findByTitleStartingWith(String title, Pageable pageable);
+    List<ProductInfoIndex> findByTitleStartingWith(String title, Pageable pageable);
 }

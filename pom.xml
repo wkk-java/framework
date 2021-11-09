@@ -21,7 +21,6 @@
         <module>flink</module>
         <module>file-management</module>
         <module>auth-server</module>
-        <module>common-cloud-dependency</module>
     </modules>
 
     <properties>
