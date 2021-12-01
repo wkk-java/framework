@@ -7,7 +7,8 @@ import java.util.concurrent.Executors;
 public class LockTest {
 
     public static void main(String[] args) {
-        ExecutorService executorService = Executors.newSingleThreadExecutor();
+
+
     }
 
     class ProductInfo {
