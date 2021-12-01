@@ -4,7 +4,6 @@ import com.alibaba.fastjson.JSONObject;
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.PropertyAccessor;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.google.common.base.Charsets;
 import com.google.common.hash.BloomFilter;
 import com.google.common.hash.Funnels;
 import com.wk.learning.JunitApplicationRunner;
@@ -194,7 +193,7 @@ public class RedisLearning extends JunitApplicationRunner {
 
     @Test
     public void testBloom() {
-        BloomFilter<String> bloomFilter = BloomFilter.create(Funnels.stringFunnel(Charsets.UTF_8), 100000, 0.01);
+        BloomFilter<CharSequence> bloomFilter = BloomFilter.create(Funnels.stringFunnel(), 100000, 0.01);
         //bloomFilter.put("10086");
         log.info("redis bloom test:{}", bloomFilter.mightContain("123456"));
         log.info("redis bloom test:{}", bloomFilter.mightContain("10086"));
