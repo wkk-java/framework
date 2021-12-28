@@ -8,7 +8,7 @@ import lombok.Data;
  * 通用结果视图类
  */
 @Data
-public class ResultView {
+public class ResultView<T> {
     /**
      * 状态码
      */
@@ -22,7 +22,7 @@ public class ResultView {
     /**
      * 数据
      */
-    private Object data;
+    private T data;
 
     /**
      * 成功
@@ -100,7 +100,7 @@ public class ResultView {
         this.msg = ResultEnum.CODE_1.getMsg();
     }
 
-    private ResultView(Object data) {
+    private ResultView(T data) {
         this.data = data;
         this.code = ResultEnum.CODE_1.getCode();
         this.msg = ResultEnum.CODE_1.getMsg();
