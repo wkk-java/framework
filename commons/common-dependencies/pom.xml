@@ -12,11 +12,9 @@
 
     <modules>
         <module>common-base-dependency</module>
-        <module>common-cloud-dependency</module>
         <module>common-dao-dependency</module>
         <module>common-configuration</module>
         <module>common-entity-dependency</module>
-        <module>common-constants</module>
     </modules>
 
     <properties>

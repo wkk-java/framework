@@ -1,6 +1,6 @@
 package com.wk.config.aop;
 
-import com.wk.constants.enums.ResultEnum;
+import com.wk.entity.enums.ResultEnum;
 import com.wk.entity.exception.BusinessRuntimeException;
 import com.wk.entity.result.ResultView;
 import lombok.extern.log4j.Log4j2;

@@ -1,6 +1,6 @@
 package com.wk.zuul.exception;
 
-import com.wk.constants.enums.ResultEnum;
+import com.wk.entity.enums.ResultEnum;
 import com.wk.entity.exception.BusinessRuntimeException;
 import com.wk.entity.result.ResultView;
 import org.slf4j.Logger;

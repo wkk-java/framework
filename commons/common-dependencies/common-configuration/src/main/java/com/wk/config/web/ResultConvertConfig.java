@@ -8,6 +8,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 
 /**
  * 结果转换配置.
@@ -27,7 +28,7 @@ public class ResultConvertConfig {
         // 设置是否需要格式化
         confg.setSerializerFeatures(SerializerFeature.PrettyFormat);
         confg.setDateFormat("yyyy-MM-dd HH:mm:ss");
-        confg.setCharset(Charset.forName("utf-8"));
+        confg.setCharset(StandardCharsets.UTF_8);
         converter.setFastJsonConfig(confg);
         return new HttpMessageConverters(converter);
     }
