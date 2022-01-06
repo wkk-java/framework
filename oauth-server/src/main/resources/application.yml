@@ -1,0 +1,28 @@
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://wk-server1:3306/oauth2?autoReconnect=true&useSSL=false
+    username: root
+    password: james
+    type: com.zaxxer.hikari.HikariDataSource
+    hikari:
+      max-lifetime: 1200000
+      connection-timeout: 60000
+      validation-timeout: 3000
+      idle-timeout: 30000
+      minimum-idle: 10
+      maximum-pool-size: 10
+      connection-test-query: select 1
+
+ribbon:
+  ReadTimeout: 10000
+
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          strategy: THREAD
+          thread:
+            timeoutInMilliseconds: 10000
+

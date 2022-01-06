@@ -46,12 +46,12 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .antMatchers("/actuator/**", "/instances/**", "/assets/**").permitAll()
                 .antMatchers("/login","/logout").permitAll()
-                .antMatchers("").hasAnyRole("")
+//                .antMatchers("").hasAnyRole("")
                 .anyRequest().authenticated()
                 .and()
-                .logout()
-                .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
-                .and()
+//                .logout()
+//                .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+//                .and()
                 .userDetailsService(userDetailsServiceBean());
     }
 

@@ -20,7 +20,7 @@
         <module>gateway</module>
         <module>flink</module>
         <module>file-management</module>
-        <module>auth-server</module>
+        <module>oauth-server</module>
     </modules>
 
     <properties>
