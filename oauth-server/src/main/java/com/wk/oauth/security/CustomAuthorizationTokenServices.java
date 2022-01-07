@@ -1,5 +1,6 @@
 package com.wk.oauth.security;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
@@ -13,6 +14,7 @@ import org.springframework.security.oauth2.provider.token.ConsumerTokenServices;
 import org.springframework.security.oauth2.provider.token.TokenEnhancer;
 import org.springframework.security.oauth2.provider.token.TokenStore;
 import org.springframework.security.web.authentication.preauth.PreAuthenticatedAuthenticationToken;
+import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
@@ -20,6 +22,7 @@ import java.util.Date;
 import java.util.Set;
 import java.util.UUID;
 
+@Component
 public class CustomAuthorizationTokenServices implements AuthorizationServerTokenServices, ConsumerTokenServices {
 
     private int refreshTokenValiditySeconds = 60 * 60 * 24 * 30; // default 30 days.
@@ -30,12 +33,13 @@ public class CustomAuthorizationTokenServices implements AuthorizationServerToke
 
     private boolean reuseRefreshToken = true;
 
+    @Autowired
     private TokenStore tokenStore;
-
+    @Autowired
     private ClientDetailsService clientDetailsService;
-
+    @Autowired
     private TokenEnhancer accessTokenEnhancer;
-
+    @Autowired
     private AuthenticationManager authenticationManager;
 
     /**

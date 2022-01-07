@@ -15,7 +15,7 @@
         <module>admin-server</module>
         <module>zuul-server</module>
         <module>dataway</module>
-        <module>commons</module>
+<!--        <module>commons</module>-->
         <module>learning</module>
         <module>gateway</module>
         <module>flink</module>
@@ -358,6 +358,9 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>${maven-compiler-plugin.version}</version>
+                <configuration>
+                    <skip>true</skip>
+                </configuration>
             </plugin>
 
             <plugin>

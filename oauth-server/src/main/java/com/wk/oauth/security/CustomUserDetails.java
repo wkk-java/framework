@@ -6,7 +6,6 @@ import org.springframework.security.core.userdetails.UserDetails;
 import java.util.Collection;
 
 public class CustomUserDetails implements UserDetails {
-    static final long serialVersionUID = -7588980448693010399L;
     private String username;
 
     private String password;

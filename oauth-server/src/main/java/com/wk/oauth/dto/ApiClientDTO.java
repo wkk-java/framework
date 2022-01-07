@@ -2,26 +2,19 @@ package com.wk.oauth.dto;
 
 import com.wk.oauth.exception.ErrorCodes;
 
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
 import java.util.UUID;
 
 
 public class ApiClientDTO {
 
-    @NotBlank(message = ErrorCodes.CLIENT_ID_IS_NULL_STR)
-    @NotNull(message = ErrorCodes.CLIENT_ID_IS_NULL_STR)
     private String clientId;
 
-    @NotBlank(message = ErrorCodes.CLIENT_SECRET_IS_NULL_STR)
-    @NotNull(message = ErrorCodes.CLIENT_SECRET_IS_NULL_STR)
     private String clientSecret;
 
     private String status;
 
     private String purpose;
 
-    @NotNull(message = ErrorCodes.ORGANIZAITON_ID_IS_NULL_STR)
     private UUID tenantId;
 
     private UUID userId;

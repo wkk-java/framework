@@ -1,7 +1,8 @@
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://wk-server1:3306/oauth2?autoReconnect=true&useSSL=false
+    jdbc-url: jdbc:mysql://wk-server1:3306/oauth2?autoReconnect=true&useSSL=false
+#    url: jdbc:mysql://wk-server1:3306/oauth2?autoReconnect=true&useSSL=false
     username: root
     password: james
     type: com.zaxxer.hikari.HikariDataSource

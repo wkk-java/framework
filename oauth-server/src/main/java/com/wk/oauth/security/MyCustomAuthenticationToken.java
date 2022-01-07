@@ -2,11 +2,11 @@ package com.wk.oauth.security;
 
 import org.springframework.security.authentication.AbstractAuthenticationToken;
 
-public class CustomAuthenticationToken extends AbstractAuthenticationToken {
+public class MyCustomAuthenticationToken extends AbstractAuthenticationToken {
 
     private CustomUserDetails userDetails;
 
-    public CustomAuthenticationToken(CustomUserDetails userDetails) {
+    public MyCustomAuthenticationToken(CustomUserDetails userDetails) {
         super(null);
         this.userDetails = userDetails;
         super.setAuthenticated(true);

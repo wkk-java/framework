@@ -12,9 +12,11 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
+/**
+ * 定制认证服务.
+ */
 @Component
 public class CustomAuthenticationProvider implements AuthenticationProvider {
-
 
     @Override
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {
@@ -22,7 +24,7 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
         String password;
         Map data = (Map) authentication.getDetails();
         String clientId = (String) data.get("client");
-        Assert.hasText(clientId, "clientId must have value");
+//        Assert.hasText(clientId, "clientId must have value");
         String type = (String) data.get("type");
         Map map;
 
@@ -38,7 +40,7 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
             throw new BadCredentialsException(errorCode);
         }
         CustomUserDetails customUserDetails = buildCustomUserDetails(username, password, userId, clientId);
-        return new CustomAuthenticationToken(customUserDetails);
+        return new MyCustomAuthenticationToken(customUserDetails);
     }
 
     private CustomUserDetails buildCustomUserDetails(String username, String password, String userId, String clientId) {

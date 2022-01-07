@@ -1,9 +1,7 @@
-package com.wk.oauth.config.oauth;
+package com.wk.oauth.config;
 
 import com.wk.oauth.security.CustomAuthorizationTokenServices;
-import com.wk.oauth.security.CustomTokenEnhancer;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.oauth2.config.annotation.configurers.ClientDetailsServiceConfigurer;
@@ -17,30 +15,27 @@ import org.springframework.security.oauth2.provider.token.AuthorizationServerTok
 import org.springframework.security.oauth2.provider.token.store.JdbcTokenStore;
 import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenConverter;
 
-import javax.sql.DataSource;
-
 @Configuration
 @EnableAuthorizationServer
-public class OAuth2Config extends AuthorizationServerConfigurerAdapter {
+public class AuthorizationServerConfiguration extends AuthorizationServerConfigurerAdapter {
 
-    @Autowired
+    @Autowired(required = false)
     private AuthenticationManager authenticationManager;
 
-    @Autowired
-    private DataSource dataSource;
-
-    @Autowired
+    @Autowired(required = false)
     private WebResponseExceptionTranslator webResponseExceptionTranslator;
 
-    @Bean
-    public JdbcClientDetailsService jdbcClientDetailsService(DataSource dataSource) {
-        return new JdbcClientDetailsService(dataSource);
-    }
+    @Autowired(required = false)
+    private JdbcClientDetailsService jdbcClientDetailsService;
 
-    @Bean
-    public JdbcTokenStore tokenStore(DataSource dataSource) {
-        return new JdbcTokenStore(dataSource);
-    }
+    @Autowired(required = false)
+    private JdbcTokenStore tokenStore;
+
+    @Autowired(required = false)
+    private CustomAuthorizationTokenServices authorizationServerTokenServices;
+
+    @Autowired(required = false)
+    private JwtAccessTokenConverter accessTokenConverter;
 
     @Override
     public void configure(AuthorizationServerSecurityConfigurer security) throws Exception {
@@ -49,33 +44,17 @@ public class OAuth2Config extends AuthorizationServerConfigurerAdapter {
 
     @Override
     public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
-        clients.withClientDetails(jdbcClientDetailsService(dataSource));
+        clients.withClientDetails(jdbcClientDetailsService);
     }
 
     @Override
     public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
         endpoints.authenticationManager(authenticationManager)
-                .tokenStore(tokenStore(dataSource))
-                .tokenServices(authorizationServerTokenServices())
-                .accessTokenConverter(accessTokenConverter())
+                .tokenStore(tokenStore)
+                .tokenServices(authorizationServerTokenServices)
+                .accessTokenConverter(accessTokenConverter)
                 .exceptionTranslator(webResponseExceptionTranslator);
     }
 
-    @Bean
-    public JwtAccessTokenConverter accessTokenConverter() {
-        JwtAccessTokenConverter converter = new CustomTokenEnhancer();
-        converter.setSigningKey("secret");
-        return converter;
-    }
 
-    @Bean
-    public AuthorizationServerTokenServices authorizationServerTokenServices() {
-        CustomAuthorizationTokenServices customTokenServices = new CustomAuthorizationTokenServices();
-        customTokenServices.setTokenStore(tokenStore(dataSource));
-        customTokenServices.setSupportRefreshToken(true);
-        customTokenServices.setReuseRefreshToken(true);
-        customTokenServices.setClientDetailsService(jdbcClientDetailsService(dataSource));
-        customTokenServices.setTokenEnhancer(accessTokenConverter());
-        return customTokenServices;
-    }
 }

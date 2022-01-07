@@ -10,15 +10,16 @@ import org.springframework.security.oauth2.common.OAuth2RefreshToken;
 import org.springframework.security.oauth2.common.exceptions.BadClientCredentialsException;
 import org.springframework.security.oauth2.provider.token.TokenStore;
 import org.springframework.security.web.authentication.logout.LogoutHandler;
+import org.springframework.stereotype.Component;
 import org.springframework.util.Assert;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+@Component
 public class CustomLogoutHandler implements LogoutHandler {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(CustomLogoutHandler.class);
-
 
     @Autowired
     private TokenStore tokenStore;

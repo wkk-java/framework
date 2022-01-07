@@ -1,4 +1,4 @@
-package com.wk.oauth.config.oauth;
+package com.wk.oauth.config;
 
 import com.wk.oauth.security.CustomAuthenticationProvider;
 import com.wk.oauth.security.filter.CustomLogoutHandler;
@@ -11,8 +11,6 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
-import org.springframework.security.crypto.password.NoOpPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.logout.HttpStatusReturningLogoutSuccessHandler;
 
 /**
@@ -22,12 +20,14 @@ import org.springframework.security.web.authentication.logout.HttpStatusReturnin
 
 @Configuration
 @EnableWebSecurity
-public class SecurityConfig extends WebSecurityConfigurerAdapter {
+public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 
 
-    @Autowired
-    CustomAuthenticationProvider customAuthenticationProvider;
+    @Autowired(required = false)
+    private CustomAuthenticationProvider customAuthenticationProvider;
 
+    @Autowired(required = false)
+    private CustomLogoutHandler customLogoutHandler;
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
@@ -37,7 +37,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Bean
     @Override
     public AuthenticationManager authenticationManagerBean() throws Exception {
-        return super.authenticationManagerBean() ;
+        return super.authenticationManagerBean();
     }
 
 
@@ -54,20 +54,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .logoutUrl("/logout")
                 .clearAuthentication(true)
                 .logoutSuccessHandler(new HttpStatusReturningLogoutSuccessHandler())
-                .addLogoutHandler(customLogoutHandler());
-
-
-    }
-
-    @Bean
-    public CustomLogoutHandler customLogoutHandler() {
-        return new CustomLogoutHandler();
-    }
-
-
-    @Bean
-    public PasswordEncoder passwordEncoder() {
-        return NoOpPasswordEncoder.getInstance();
+                .addLogoutHandler(customLogoutHandler);
     }
 
 }
