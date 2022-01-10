@@ -29,9 +29,9 @@ public class CustomAuthorizationTokenServices implements AuthorizationServerToke
 
     private int accessTokenValiditySeconds = 60 * 60 * 12; // default 12 hours.
 
-    private boolean supportRefreshToken = false;
+    private boolean supportRefreshToken = true;
 
-    private boolean reuseRefreshToken = true;
+    private boolean reuseRefreshToken = false;
 
     @Autowired
     private TokenStore tokenStore;

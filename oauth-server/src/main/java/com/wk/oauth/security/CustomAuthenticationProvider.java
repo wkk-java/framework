@@ -24,8 +24,8 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
         String password;
         Map data = (Map) authentication.getDetails();
         String clientId = (String) data.get("client");
-//        Assert.hasText(clientId, "clientId must have value");
-        String type = (String) data.get("type");
+        Assert.hasText(clientId, "clientId must have value");
+        String type = (String) data.get("grant_type");
         Map map;
 
         password = (String) authentication.getCredentials();
@@ -58,7 +58,7 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
         requestParam.put("userName", username);
         requestParam.put("password", password);
         if (type != null && StringUtils.isNotBlank(type)) {
-            requestParam.put("type", type);
+            requestParam.put("grant_type", type);
         }
         return requestParam;
     }
