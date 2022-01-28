@@ -25,9 +25,9 @@ import java.util.UUID;
 @Component
 public class CustomAuthorizationTokenServices implements AuthorizationServerTokenServices, ConsumerTokenServices {
 
-    private int refreshTokenValiditySeconds = 60 * 60 * 24 * 30; // default 30 days.
+    private int refreshTokenValiditySeconds = 60 * 60 * 24 * 7; // default 7 days.
 
-    private int accessTokenValiditySeconds = 60 * 60 * 12; // default 12 hours.
+    private int accessTokenValiditySeconds = 60 * 60 * 15; // default 15 minutes.
 
     private boolean supportRefreshToken = true;
 
@@ -79,11 +79,10 @@ public class CustomAuthorizationTokenServices implements AuthorizationServerToke
 
     @Override
     @Transactional(noRollbackFor = {InvalidTokenException.class, InvalidGrantException.class})
-    public OAuth2AccessToken refreshAccessToken(String refreshTokenValue, TokenRequest tokenRequest)
-            throws AuthenticationException {
+    public OAuth2AccessToken refreshAccessToken(String refreshTokenValue, TokenRequest tokenRequest) throws AuthenticationException {
 
         if (!supportRefreshToken) {
-            throw new InvalidGrantException("Invalid refresh token: " + refreshTokenValue);
+            throw new InvalidGrantException("当前系统不支持刷新token");
         }
 
         OAuth2RefreshToken refreshToken = tokenStore.readRefreshToken(refreshTokenValue);

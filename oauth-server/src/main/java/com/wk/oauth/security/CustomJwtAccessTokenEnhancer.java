@@ -30,11 +30,12 @@ public class CustomJwtAccessTokenEnhancer extends JwtAccessTokenConverter implem
 
         OAuth2AccessToken enhancedToken = super.enhance(customAccessToken, authentication);
         enhancedToken.getAdditionalInformation().put(TOKEN_SEG_CLIENT, clientId);
+        enhancedToken.getAdditionalInformation().put(TOKEN_SEG_USER_ID, clientId);
         return enhancedToken;
     }
 
     @Override
     public void setSigningKey(String key) {
-        super.setSigningKey("123456");
+        super.setSigningKey(key);
     }
 }
