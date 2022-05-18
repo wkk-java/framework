@@ -17,10 +17,10 @@
         <module>dataway</module>
 <!--        <module>commons</module>-->
         <module>learning</module>
-        <module>gateway</module>
+        <module>gateway-server</module>
         <module>flink</module>
-        <module>file-management</module>
         <module>oauth-server</module>
+        <module>file-management</module>
     </modules>
 
     <properties>
