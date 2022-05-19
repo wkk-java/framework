@@ -142,11 +142,11 @@
 <!--                <inherited>false</inherited>-->
 <!--            </plugin>-->
 
-            <plugin>
-                <groupId>com.wk</groupId>
-                <artifactId>dockercompose-maven-plugin</artifactId>
-                <inherited>false</inherited>
-            </plugin>
+<!--            <plugin>-->
+<!--                <groupId>com.wk</groupId>-->
+<!--                <artifactId>dockercompose-maven-plugin</artifactId>-->
+<!--                <inherited>false</inherited>-->
+<!--            </plugin>-->
 
         </plugins>
     </build>

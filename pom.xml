@@ -326,24 +326,24 @@
                     </executions>
                 </plugin>
 
-                <plugin>
-                    <groupId>com.wk</groupId>
-                    <artifactId>dockercompose-maven-plugin</artifactId>
-                    <version>1.0.0-SNAPSHOT</version>
-                    <executions>
-                        <execution>
-                            <phase>package</phase>
-                            <goals>
-                                <goal>generate</goal>
-                            </goals>
-                            <configuration>
-                                <applicationGroup>framework</applicationGroup>
-                                <dockerNexusServer>${dockerNexusServer}</dockerNexusServer>
-                                <dockerNexusServerPort>${dockerNexusServerPort}</dockerNexusServerPort>
-                            </configuration>
-                        </execution>
-                    </executions>
-                </plugin>
+<!--                <plugin>-->
+<!--                    <groupId>com.wk</groupId>-->
+<!--                    <artifactId>dockercompose-maven-plugin</artifactId>-->
+<!--                    <version>1.0.0-SNAPSHOT</version>-->
+<!--                    <executions>-->
+<!--                        <execution>-->
+<!--                            <phase>package</phase>-->
+<!--                            <goals>-->
+<!--                                <goal>generate</goal>-->
+<!--                            </goals>-->
+<!--                            <configuration>-->
+<!--                                <applicationGroup>framework</applicationGroup>-->
+<!--                                <dockerNexusServer>${dockerNexusServer}</dockerNexusServer>-->
+<!--                                <dockerNexusServerPort>${dockerNexusServerPort}</dockerNexusServerPort>-->
+<!--                            </configuration>-->
+<!--                        </execution>-->
+<!--                    </executions>-->
+<!--                </plugin>-->
             </plugins>
         </pluginManagement>
 
