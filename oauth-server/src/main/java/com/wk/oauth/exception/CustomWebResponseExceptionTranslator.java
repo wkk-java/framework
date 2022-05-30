@@ -36,8 +36,8 @@ public class CustomWebResponseExceptionTranslator extends DefaultWebResponseExce
                 LOGGER.error("AbstractException", actual);
             } else {
                 httpStatus = HttpStatus.INTERNAL_SERVER_ERROR.value();
-                code = GenericErrorCodes.GENERIC_API_ERROR_CODE.getCode() + "";
-                message = GenericErrorCodes.GENERIC_API_ERROR_CODE.getMessage();
+                code = ErrorCode.GENERIC_API_ERROR_CODE.getCode() + "";
+                message = ErrorCode.GENERIC_API_ERROR_CODE.getMessage();
                 LOGGER.error("HystrixRuntimeException", actual);
             }
 
@@ -50,7 +50,7 @@ public class CustomWebResponseExceptionTranslator extends DefaultWebResponseExce
 
             String errorCode = oAuth2Exception.getMessage();
 
-            oAuth2Exception.addAdditionalInformation("code", StringUtils.isNotEmpty(errorCode) ? errorCode : GenericErrorCodes.GENERIC_API_ERROR_CODE.getCode() + "");
+            oAuth2Exception.addAdditionalInformation("code", StringUtils.isNotEmpty(errorCode) ? errorCode : ErrorCode.GENERIC_API_ERROR_CODE.getCode() + "");
             oAuth2Exception.addAdditionalInformation("message", "账号认证失败");
             LOGGER.error("OAuth2Exception", oAuth2Exception);
         }

@@ -14,7 +14,11 @@ spring:
       minimum-idle: 10
       maximum-pool-size: 10
       connection-test-query: select 1
-
+  redis:
+    host: wk-server
+    port: 6379
+    password: ${SECURITY_USER_PASSWORD}
+    database: 0
 ribbon:
   ReadTimeout: 10000
 

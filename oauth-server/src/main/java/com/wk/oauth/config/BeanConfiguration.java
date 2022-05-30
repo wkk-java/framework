@@ -1,6 +1,7 @@
 package com.wk.oauth.config;
 
 import com.wk.oauth.exception.CustomWebResponseExceptionTranslator;
+import com.wk.oauth.security.CustomAuthenticationProvider;
 import com.wk.oauth.security.CustomAuthorizationTokenServices;
 import com.wk.oauth.security.CustomJwtAccessTokenEnhancer;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,25 +9,22 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.jdbc.DataSourceBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.oauth2.provider.client.JdbcClientDetailsService;
 import org.springframework.security.oauth2.provider.error.WebResponseExceptionTranslator;
 import org.springframework.security.oauth2.provider.token.AuthorizationServerTokenServices;
+import org.springframework.security.oauth2.provider.token.TokenStore;
 import org.springframework.security.oauth2.provider.token.store.JdbcTokenStore;
 import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenConverter;
+import org.springframework.security.oauth2.provider.token.store.redis.RedisTokenStore;
 
 import javax.sql.DataSource;
 
 
 @Configuration
 public class BeanConfiguration {
-
-    @Autowired
-    private JdbcClientDetailsService jdbcClientDetailsService;
-
-    @Autowired
-    private JwtAccessTokenConverter accessTokenConverter;
 
     @Bean
     public WebResponseExceptionTranslator webResponseExceptionTranslator() {
@@ -51,7 +49,7 @@ public class BeanConfiguration {
 //    @Bean
 //    public JwtAccessTokenConverter accessTokenConverter() {
 //        JwtAccessTokenConverter converter = new CustomJwtAccessTokenEnhancer();
-//        converter.setSigningKey("secret");
+////        converter.setSigningKey("secret");
 //        return converter;
 //    }
 
@@ -61,8 +59,8 @@ public class BeanConfiguration {
 //        customTokenServices.setTokenStore(tokenStore(dataSource()));
 //        customTokenServices.setSupportRefreshToken(true);
 //        customTokenServices.setReuseRefreshToken(true);
-//        customTokenServices.setClientDetailsService(jdbcClientDetailsService);
-//        customTokenServices.setTokenEnhancer(accessTokenConverter);
+//        customTokenServices.setClientDetailsService(jdbcClientDetailsService(dataSource()));
+//        customTokenServices.setTokenEnhancer(accessTokenConverter());
 //        return customTokenServices;
 //    }
 

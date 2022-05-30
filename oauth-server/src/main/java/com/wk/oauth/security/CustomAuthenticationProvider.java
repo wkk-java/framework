@@ -56,7 +56,7 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
         requestParam.put("userName", username);
         requestParam.put("password", password);
         if (type != null && StringUtils.isNotBlank(type)) {
-            requestParam.put("type", type);
+            requestParam.put("grant_type", type);
         }
         return requestParam;
     }
