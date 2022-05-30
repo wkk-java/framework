@@ -6,11 +6,9 @@ import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.stereotype.Component;
-import org.springframework.util.Assert;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.UUID;
 
 /**
  * 定制认证服务.
@@ -25,7 +23,7 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
         Map data = (Map) authentication.getDetails();
         String clientId = (String) data.get("client");
 //        Assert.hasText(clientId, "clientId must have value");
-        String type = (String) data.get("type");
+        String type = (String) data.get("grant_type");
         Map map;
 
         password = (String) authentication.getCredentials();
@@ -68,7 +66,7 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
 
         //checkUsernameAndPassword
         Map ret = new HashMap();
-        ret.put("userId", UUID.randomUUID().toString());
+        ret.put("userId", "123abc");
 
         return ret;
     }
